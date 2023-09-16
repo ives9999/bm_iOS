@@ -254,3 +254,18 @@ enum MemberItemEnum: String {
         }
     }
 }
+
+class MainMemberTable: Table {
+    var icon: String = "nophoto"
+    
+    init(title: String, icon: String) {
+        super.init()
+        
+        self.title = title
+        self.icon = icon
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
+}

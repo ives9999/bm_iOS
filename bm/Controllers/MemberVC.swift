@@ -19,7 +19,7 @@ class MemberVC: BaseViewController {
 //    }()
         
     //var memberSections: [IconTextSection] = [IconTextSection]()
-    var rows: [MainMemberTable] = [MainMemberTable]()
+    var rows: [MainMemberItem] = [MainMemberItem]()
     
     //let heightForSection: CGFloat = 34
     
@@ -83,7 +83,7 @@ class MemberVC: BaseViewController {
             if mainMemberEnum == MainMemberEnum.mobile_validate && (Member.instance.validate & MOBILE_VALIDATE > 0) {
                 continue
             }
-            rows.append(MainMemberTable(title: mainMemberEnum.rawValue, icon: mainMemberEnum.getIcon()))
+            rows.append(MainMemberItem(title: mainMemberEnum.rawValue, icon: mainMemberEnum.getIcon()))
         }
     }
     
@@ -170,22 +170,20 @@ class MemberVC: BaseViewController {
         }
     }
     
-    override func didSelect<U>(item: U, at indexPath: IndexPath) {
-        if let _item: MainMemberTable = item as? MainMemberTable {
-            let mainMemberEnum: MainMemberEnum = MainMemberEnum.chineseGetEnum(text: _item.title)
-            if (mainMemberEnum == MainMemberEnum.email_validate) {
-                toValidate(type: "email")
-            } else if (mainMemberEnum == MainMemberEnum.mobile_validate) {
-                toValidate(type: "mobile")
-            } else if (mainMemberEnum == MainMemberEnum.bank) {
-                toMemberBank()
-            } else if (mainMemberEnum == MainMemberEnum.delete) {
-                delete()
-            } else if (mainMemberEnum == MainMemberEnum.refresh) {
-                refresh()
-            } else {
-                toMemberItem(mainMemberEnum)
-            }
+    func didSelect(row: MainMemberItem) {
+        let mainMemberEnum: MainMemberEnum = MainMemberEnum.chineseGetEnum(text: row.title)
+        if (mainMemberEnum == MainMemberEnum.email_validate) {
+            toValidate(type: "email")
+        } else if (mainMemberEnum == MainMemberEnum.mobile_validate) {
+            toValidate(type: "mobile")
+        } else if (mainMemberEnum == MainMemberEnum.bank) {
+            toMemberBank()
+        } else if (mainMemberEnum == MainMemberEnum.delete) {
+            delete()
+        } else if (mainMemberEnum == MainMemberEnum.refresh) {
+            refresh()
+        } else {
+            toMemberItem(mainMemberEnum)
         }
     }
     
@@ -198,7 +196,7 @@ extension MemberVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.rows.count == 0 {
-            return 0
+            return 3
         } else {
             return self.rows.count + 3
         }
@@ -228,6 +226,7 @@ extension MemberVC: UITableViewDataSource {
         } else if indexPath.row == 1 {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "LevelCell", for: indexPath) as? LevelCell {
                 
+                cell.delegate = self
                 cell.configureSubViews()
                 
                 return cell
@@ -239,7 +238,8 @@ extension MemberVC: UITableViewDataSource {
         } else {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "MainMemberCell", for: indexPath) as? MainMemberCell {
                 if rows.count >= indexPath.row - 3 {
-                    cell.item = self.rows[indexPath.row - 3]
+                    cell.configureSubViews(row: self.rows[indexPath.row - 3])
+                    //cell.item = self.rows[indexPath.row - 3]
                 }
                 return cell
             }
@@ -261,8 +261,8 @@ extension MemberVC: UITableViewDelegate {
             bannerToSubscription()
         } else {
             if rows.count >= indexPath.row - 3 {
-                let row: MainMemberTable = rows[indexPath.row - 3]
-                didSelect(item: row, at: indexPath)
+                let row: MainMemberItem = rows[indexPath.row - 3]
+                didSelect(row: row)
             }
         }
     }
@@ -494,8 +494,12 @@ class LevelCell: UITableViewCell {
     
     func commonInit() {
         self.contentView.backgroundColor = UIColor(MY_BLACK)
+        
         let levelGR1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(subscription(_:)))
         levelRightContainer.addGestureRecognizer(levelGR1)
+        let levelGR2: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(subscription(_:)))
+        subscriptionIcon.addGestureRecognizer(levelGR2)
+        
         anchor()
     }
     
@@ -640,7 +644,7 @@ class BannerCell: UITableViewCell {
     }
 }
 
-class MainMemberCell: BaseCell<MainMemberTable, MemberVC> {
+class MainMemberCell: UITableViewCell {
     
     let containerView: UIView = {
         let view: UIView = UIView()
@@ -680,7 +684,8 @@ class MainMemberCell: BaseCell<MainMemberTable, MemberVC> {
         commonInit()
     }
     
-    override func commonInit() {
+    func commonInit() {
+        self.contentView.backgroundColor = UIColor(MY_BLACK)
         anchor()
     }
     
@@ -716,20 +721,17 @@ class MainMemberCell: BaseCell<MainMemberTable, MemberVC> {
         }
     }
     
-    override func configureSubViews() {
-        super.configureSubViews()
-        if item != nil {
-            iconIV.image = UIImage(named: item!.icon)
-            titleLbl.text = item!.title
-        }
+    func configureSubViews(row: MainMemberItem) {
+        iconIV.image = UIImage(named: row.icon)
+        titleLbl.text = row.title
     }
 }
 
-class MainMemberTable: Table {
+class MainMemberItem {
     var icon: String = "nophoto"
+    var title: String = ""
     
     init(title: String, icon: String) {
-        super.init()
         
         self.title = title
         self.icon = icon

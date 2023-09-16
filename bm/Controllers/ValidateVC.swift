@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SCLAlertView
 
 class ValidateVC: BaseViewController {
 
@@ -57,9 +56,10 @@ class ValidateVC: BaseViewController {
             showTop2!.setTitle("手機認證")
             emailTxt2.setLabel("手機號碼")
             emailTxt2.setValue(Member.instance.mobile)
-            emailTxt2.setIcon("mobild_svg")
+            emailTxt2.setIcon("mobile_svg")
         }
         submitButton.delegate = self
+        sendButton.delegate = self
         
         anchor()
 
@@ -135,35 +135,6 @@ class ValidateVC: BaseViewController {
             make.height.equalTo(52)
         }
     }
-
-//    @IBAction func resend(_ sender: Any) {
-//        let value = typeTxt.text!
-//        if value.count <= 0 {
-//            var msg = ""
-//            if type == "email" {
-//                msg = "請填寫email"
-//            } else if type == "mobile" {
-//                msg = "請填寫手機號碼"
-//            }
-//            SCLAlertView().showWarning("警告", subTitle: msg)
-//        } else {
-//            Global.instance.addSpinner(superView: self.view)
-//            MemberService.instance.sendVaildateCode(type: type, value: value, token: Member.instance.token) { (success) in
-//                Global.instance.removeSpinner(superView: self.view)
-//                if (success) {
-//                    var msg = ""
-//                    if self.type == "email" {
-//                        msg = "已經將認證信寄到註冊的信箱了"
-//                    } else if self.type == "mobile" {
-//                        msg = "已經將認證碼發送到註冊的手機了"
-//                    }
-//                    SCLAlertView().showInfo("訊息", subTitle: msg)
-//                } else {
-//                    SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
-//                }
-//            }
-//        }
-//    }
 }
 
 extension ValidateVC: SubmitButtonDelegate {
@@ -172,7 +143,7 @@ extension ValidateVC: SubmitButtonDelegate {
         let code = codeTxt2.value
         if code.count <= 0 {
             let msg = "請填寫認證碼"
-            SCLAlertView().showWarning("警告", subTitle: msg)
+            warning(msg)
         } else {
             Global.instance.addSpinner(superView: self.view)
             MemberService.instance.validate(type: type, code: code, token: Member.instance.token) { (success) in
@@ -203,7 +174,7 @@ extension ValidateVC: SubmitButtonDelegate {
                                     do {
                                         let table: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
                                         table.toSession(isLoggedIn: true)
-                                        self.toMemberItem(MainMemberEnum.info)
+                                        self.toMember()
                                     } catch {
                                         self.warning(error.localizedDescription)
                                     }
@@ -215,7 +186,38 @@ extension ValidateVC: SubmitButtonDelegate {
                     }
 
                 } else {
-                    SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
+                    self.warning(MemberService.instance.msg)
+                }
+            }
+        }
+    }
+}
+
+extension ValidateVC: CancelButtonDelegate {
+    func cancel2() {
+        let value = emailTxt2.value
+        if value.count <= 0 {
+            var msg = ""
+            if type == "email" {
+                msg = "請填寫email"
+            } else if type == "mobile" {
+                msg = "請填寫手機號碼"
+            }
+            warning(msg)
+        } else {
+            Global.instance.addSpinner(superView: self.view)
+            MemberService.instance.sendVaildateCode(type: type, value: value, token: Member.instance.token) { (success) in
+                Global.instance.removeSpinner(superView: self.view)
+                if (success) {
+                    var msg = ""
+                    if self.type == "email" {
+                        msg = "已經將認證信寄到註冊的信箱了"
+                    } else if self.type == "mobile" {
+                        msg = "已經將認證碼發送到註冊的手機了"
+                    }
+                    self.info(msg)
+                } else {
+                    self.warning(MemberService.instance.msg)
                 }
             }
         }

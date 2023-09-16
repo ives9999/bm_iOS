@@ -9,6 +9,8 @@
 import UIKit
 
 class CancelButton: SuperButton {
+    
+    var delegate: CancelButtonDelegate?
 
     init() {
         super.init(frame: .zero)
@@ -33,6 +35,14 @@ class CancelButton: SuperButton {
         self.layer.borderColor = UIColor(MY_GREEN).cgColor
         //self.cornerRadius = MY_BUTTON_CORNER
         //contentEdgeInsets = UIEdgeInsets(top: 4, left: 36, bottom: 4, right: 36)
+        self.addTarget(self, action: #selector(cancel), for: .touchUpInside)
     }
 
+    @objc func cancel() {
+        delegate?.cancel2()
+    }
+}
+
+protocol CancelButtonDelegate {
+    func cancel2()
 }
