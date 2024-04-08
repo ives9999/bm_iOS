@@ -41,7 +41,7 @@ class ProductListCell: List2Cell {
                 priceLbl.text = "未提供"
             }
             
-            cityBtn.isHidden = false
+            cityBtn.isHidden = true
             
             let chevron = UIImage(named: "greater1")
             self.accessoryType = .disclosureIndicator

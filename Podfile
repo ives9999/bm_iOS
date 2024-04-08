@@ -6,14 +6,14 @@ target 'bm' do
   use_frameworks!
 
   # Pods for bm
-  pod 'Alamofire', '~> 5.4'
+  pod 'Alamofire'
   pod 'Socket.IO-Client-Swift'
   pod 'Device.swift'
   pod 'AlamofireImage'
   pod 'TRVideoView'
   pod 'UIColor_Hex_Swift'
   pod 'SwipeCellKit'
-  pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
+  #pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
   
   pod 'ECPayPaymentGatewayKit', '~> 1.0.4'
   pod 'PromiseKit' , '~> 6.8.3'

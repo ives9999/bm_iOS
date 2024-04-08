@@ -1,7 +1,7 @@
 //
 //  Checkbox.swift
 //  CheckboxDemo
-//  https://github.com/BeauNouvelle/SimpleCheckbox
+//
 
 import Foundation
 import UIKit
@@ -12,8 +12,9 @@ import UIKit
 open class Checkbox: UIControl {
 
     // MARK: - Enums
+
     /// Shape of the center checkmark that appears when `Checkbox.isChecked == true`.
-    public enum CheckmarkStyle: String {
+    @objc public enum CheckmarkStyle: Int {
         /// ■
         case square
         /// ●
@@ -27,7 +28,8 @@ open class Checkbox: UIControl {
     /// Shape of the outside box containing the checkmarks contents.
     ///
     /// Used as a visual indication of where the user can tap.
-    public enum BorderStyle: String {
+
+    @objc public enum BorderStyle: Int {
         /// ▢
         case square
         /// ◯
@@ -35,11 +37,12 @@ open class Checkbox: UIControl {
     }
 
     // MARK: - Properties
+
     /// Shape of the center checkmark that appears when `Checkbox.isChecked == true`.
     ///
     /// **Default:** `CheckmarkStyle.square`
-    dynamic public var checkmarkStyle: CheckmarkStyle = .square
-    @IBInspectable private var checkmarkStyleIB: String {
+    @objc dynamic public var checkmarkStyle: CheckmarkStyle = .square
+    @IBInspectable private var checkmarkStyleIB: Int {
         set {
             checkmarkStyle = CheckmarkStyle(rawValue: newValue) ?? .square
         }
@@ -53,8 +56,8 @@ open class Checkbox: UIControl {
     /// Used as a visual indication of where the user can tap.
     ///
     /// **Default:** `BorderStyle.square`
-    dynamic public var borderStyle: BorderStyle = .square
-    @IBInspectable private var borderStyleIB: String {
+    @objc dynamic public var borderStyle: BorderStyle = .square
+    @IBInspectable private var borderStyleIB: Int {
         set {
             borderStyle = BorderStyle(rawValue: newValue) ?? .square
         }
@@ -94,13 +97,12 @@ open class Checkbox: UIControl {
     /// **Default:** The current tintColor.
     @IBInspectable public var checkmarkColor: UIColor!
 
-    /// **Default:** White.
-    @available(swift, obsoleted: 4.1, renamed: "checkboxFillColor", message: "Defaults to a clear color")
-    public var checkboxBackgroundColor: UIColor! = .white
+    /// **Default:** Replaces the checkmark style with an emoji.
+    @IBInspectable public var emoji: String?
     
     /// The checkboxes fill color.
     ///
-    /// **Default:** `UIColoe.Clear`
+    /// **Default:** `UIColor.Clear`
     @IBInspectable public var checkboxFillColor: UIColor = .clear
     
     /// Sets the corner radius for the checkbox border.
@@ -136,9 +138,11 @@ open class Checkbox: UIControl {
     /// **Default:** `true`
     @IBInspectable public var useHapticFeedback: Bool = true
 
+    #if !os(tvOS)
     private var feedbackGenerator: UIImpactFeedbackGenerator?
-
+    #endif
     // MARK: - Lifecycle
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setupDefaults()
@@ -157,21 +161,27 @@ open class Checkbox: UIControl {
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture(recognizer:)))
         addGestureRecognizer(tapGesture)
-
-        if useHapticFeedback {
+        
+        #if !os(tvOS)
+        if useHapticFeedback, #available(iOS 11, *), #available(macOS 13, *) {
             feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
             feedbackGenerator?.prepare()
         }
+        #endif
     }
 
     override public func draw(_ rect: CGRect) {
         drawBorder(shape: borderStyle, in: rect)
-        if isChecked {
+        guard isChecked else { return }
+        if let unwrappedEmoji = emoji {
+            drawEmoji(unwrappedEmoji, in: rect)
+        } else {
             drawCheckmark(style: checkmarkStyle, in: rect)
         }
     }
 
     // MARK: - Borders
+
     private func drawBorder(shape: BorderStyle, in rect: CGRect) {
         let adjustedRect = CGRect(x: borderLineWidth/2,
                                   y: borderLineWidth/2,
@@ -216,7 +226,19 @@ open class Checkbox: UIControl {
         ovalPath.fill()
     }
 
+    // MARK: - Emoji
+
+    private func drawEmoji(_ value: String, in rect: CGRect) {
+        let font = UIFont.systemFont(ofSize: rect.height/1.4)
+        let style = NSMutableParagraphStyle()
+        style.alignment = NSTextAlignment.center
+        let attributes = [NSAttributedString.Key.font: font, NSAttributedString.Key.paragraphStyle: style]
+        let textRect = CGRect(x: 0, y: (rect.height-font.lineHeight)/2, width: rect.width, height: rect.height)
+        (value as NSString).draw(in: textRect, withAttributes: attributes)
+    }
+
     // MARK: - Checkmarks
+
     private func drawCheckmark(style: CheckmarkStyle, in rect: CGRect) {
         let adjustedRect = checkmarkRect(in: rect)
         switch checkmarkStyle {
@@ -265,6 +287,7 @@ open class Checkbox: UIControl {
     }
 
     // MARK: - Size Calculations
+
     private func checkmarkRect(in rect: CGRect) -> CGRect {
         let width = rect.maxX * checkmarkSize
         let height = rect.maxY * checkmarkSize
@@ -276,24 +299,27 @@ open class Checkbox: UIControl {
     }
 
     // MARK: - Touch
+
     @objc private func handleTapGesture(recognizer: UITapGestureRecognizer) {
         isChecked = !isChecked
         valueChanged?(isChecked)
         sendActions(for: .valueChanged)
 
         if useHapticFeedback {
+            #if !os(tvOS)
             // Trigger impact feedback.
             feedbackGenerator?.impactOccurred()
 
             // Keep the generator in a prepared state.
             feedbackGenerator?.prepare()
+            #endif
         }
     }
 
     override public func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let relativeFrame = self.bounds
         let hitTestEdgeInsets = UIEdgeInsets(top: -increasedTouchRadius, left: -increasedTouchRadius, bottom: -increasedTouchRadius, right: -increasedTouchRadius)
-        let hitFrame = relativeFrame.insetBy(dx: hitTestEdgeInsets.left, dy: hitTestEdgeInsets.top)
+        let hitFrame = relativeFrame.inset(by: hitTestEdgeInsets)
         return hitFrame.contains(point)
     }
 

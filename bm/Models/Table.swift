@@ -9,6 +9,10 @@
 import Foundation
 
 class Tables2<T: Codable>: Codable {
+    var status: Int = 0
+    var meta: Meta?
+    
+    
     var success: Bool = false
     var page: Int = -1
     var totalCount: Int = -1

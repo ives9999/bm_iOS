@@ -119,7 +119,7 @@ PODS:
   - YouTubePlayer (0.7.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.4)
+  - Alamofire
   - AlamofireImage
   - AssistantKit
   - CryptoSwift (~> 1.4.1)
@@ -217,6 +217,6 @@ SPEC CHECKSUMS:
   UIColor_Hex_Swift: 20cb4e8d51b63e168a9da6933bc5d39cd8fb4ab5
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-PODFILE CHECKSUM: 1d6671e680e9353923caf4b62748f48ce837e8c4
+PODFILE CHECKSUM: 9cc74659dc59e5832b747b3c53465460c7bb27f1
 
 COCOAPODS: 1.11.3

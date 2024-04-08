@@ -253,7 +253,7 @@ class DataService {
         }
         
         self.needDownloads = [Dictionary<String, Any>]()
-        var filter: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
+        var filter: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perpage": String(perPage)]
         if (_filter != nil) {
             filter = filter.merging(_filter!, uniquingKeysWith: { (first, _) in first })
         }
@@ -284,6 +284,8 @@ class DataService {
 
                     self.jsonData = response.data
                     completion(true)
+                    //let str = String(decoding: response.data!, as: UTF8.self)
+                    //print(str)
                     //s = try JSONDecoder().decode(t, from: response.data!)
                     //if s != nil {
                         //self.tables = s!

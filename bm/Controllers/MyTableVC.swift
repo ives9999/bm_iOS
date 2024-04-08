@@ -159,7 +159,7 @@ class MyTableVC: BaseViewController {
     
     override func genericTable() {
         
-        //jsonData?.prettyPrintedJSONString
+        jsonData?.prettyPrintedJSONString
         var mysTable: TeamsTable?
         do {
             if (jsonData != nil) {
