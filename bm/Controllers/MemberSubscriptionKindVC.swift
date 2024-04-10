@@ -113,30 +113,30 @@ class MemberSubscriptionKindVC: BaseViewController {
             if (jsonData != nil) {
                 //print(jsonData!.prettyPrintedJSONString)
                 let tables2: Tables2 = try JSONDecoder().decode(Tables2<MemberSubscriptionKindTable>.self, from: jsonData!)
-                if (tables2.success) {
-                    if tables2.rows.count > 0 {
-                        
-                        for row in tables2.rows {
-                            row.filterRow()
-                            
-                            if self.tableViewSetSelected(row: row) {
-                                row.selected = true
-                            }
-                        }
-                        
-                        if (page == 1) {
-                            page = tables2.page
-                            perPage = tables2.perPage
-                            totalCount = tables2.totalCount
-                            let _totalPage: Int = totalCount / perPage
-                            totalPage = (totalCount % perPage > 0) ? _totalPage + 1 : _totalPage
-                        }
-                        
-                        rows += tables2.rows
-                    }
-                } else {
-                    msg = "解析JSON字串時，沒有成功，系統傳回值錯誤，請洽管理員"
-                }
+//                if (tables2.success) {
+//                    if tables2.rows.count > 0 {
+//                        
+//                        for row in tables2.rows {
+//                            row.filterRow()
+//                            
+//                            if self.tableViewSetSelected(row: row) {
+//                                row.selected = true
+//                            }
+//                        }
+//                        
+//                        if (page == 1) {
+//                            page = tables2.page
+//                            perPage = tables2.perPage
+//                            totalCount = tables2.totalCount
+//                            let _totalPage: Int = totalCount / perPage
+//                            totalPage = (totalCount % perPage > 0) ? _totalPage + 1 : _totalPage
+//                        }
+//                        
+//                        rows += tables2.rows
+//                    }
+//                } else {
+//                    msg = "解析JSON字串時，沒有成功，系統傳回值錯誤，請洽管理員"
+//                }
             } else {
                 msg = "無法從伺服器取得正確的json資料，請洽管理員"
             }

@@ -137,8 +137,8 @@ class EditTeamVC: EditVC {
         row = OneRow(title: "球隊狀態", value: myTable!.status, show: myTable!.status_show, key: STATUS_KEY, cell: "switch")
         rows.append(row)
         var weekdays: Int = 0
-        for weekday in myTable!.weekdays {
-            let n: Int = (pow(2, weekday.weekday) as NSDecimalNumber).intValue
+        for weekday in myTable!.weekdays.num {
+            let n: Int = (pow(2, weekday) as NSDecimalNumber).intValue
             weekdays = weekdays | n
         }
         row = OneRow(title: "星期幾", value: String(weekdays), show: myTable!.weekdays_show, key: WEEKDAYS_KEY, cell: "more", isRequired: true)

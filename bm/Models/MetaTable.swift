@@ -8,12 +8,14 @@
 
 import Foundation
 
-class Meta: Codable {
+class MetaTable: Codable {
     var totalCount: Int = 0
     var totalPage: Int = 0
     var currentPage: Int = 1
     var offset: Int = 0
     var perPage: Int = 20
+    
+    init(){}
     
     required init(from decoder: Decoder) throws {
         

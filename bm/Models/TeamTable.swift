@@ -8,20 +8,20 @@
 
 import Foundation
 
-class TeamsTable: Tables {
+class TeamsTable: Tables2<TeamTable> {
     
-    var rows: [TeamTable] = [TeamTable]()
+    //var rows: [TeamTable] = [TeamTable]()
     
-    enum CodingKeys: String, CodingKey {
-        case rows
-    }
-    
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-        
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        rows = try container.decode([TeamTable].self, forKey: .rows)
-    }
+//    enum CodingKeys: String, CodingKey {
+//        case rows
+//    }
+//    
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//        
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        rows = try container.decode([TeamTable].self, forKey: .rows)
+//    }
 }
 
 class TeamTable: Table {
@@ -51,7 +51,8 @@ class TeamTable: Table {
     var temp_status: String = ""
     //var temp_signup_count: Int = 0
     var color: String = ""
-    var weekdays: [Team_WeekdaysTable] = [Team_WeekdaysTable]()
+    var weekdays: WeekdaysTable = WeekdaysTable()
+    //var weekdays: [Team_WeekdaysTable] = [Team_WeekdaysTable]()
     var arena: ArenaTable?
     //var signupDate: SignupDateTable?
     var nextDate: String = ""
@@ -152,7 +153,8 @@ class TeamTable: Table {
         do {color = try container.decode(String.self, forKey: .color)}catch{color = ""}
         
         //temp_signup_count = try container.decodeIfPresent(Int.self, forKey: .temp_signup_count) ?? 0
-        weekdays = try container.decodeIfPresent([Team_WeekdaysTable].self, forKey: .weekdays) ?? [Team_WeekdaysTable]()
+        weekdays = try container.decodeIfPresent(WeekdaysTable.self, forKey: .weekdays) ?? WeekdaysTable()
+        //weekdays = try container.decodeIfPresent([Team_WeekdaysTable].self, forKey: .weekdays) ?? [Team_WeekdaysTable]()
         arena = try container.decodeIfPresent(ArenaTable.self, forKey: .arena) ?? nil
         //signupDate = try container.decodeIfPresent(SignupDateTable.self, forKey: .signupDate) ?? nil
         isSignup = try container.decodeIfPresent(Bool.self, forKey: .isSignup) ?? false
@@ -188,11 +190,11 @@ class TeamTable: Table {
         
         temp_status_show = STATUS(status: temp_status).rawValue
         
-        if weekdays.count > 0 {
+        if weekdays.num.count > 0 {
             var show: [String] = [String]()
-            for weekday in weekdays {
-                let tmp: String = WEEKDAY(weekday: weekday.weekday).toString()
-                show.append(tmp)
+            for chinese in weekdays.chinese {
+                //let tmp: String = WEEKDAY(weekday: weekday.weekday).toString()
+                show.append(chinese)
             }
             weekdays_show = show.joined(separator: ",")
         }

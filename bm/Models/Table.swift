@@ -10,23 +10,26 @@ import Foundation
 
 class Tables2<T: Codable>: Codable {
     var status: Int = 0
-    var meta: Meta?
+    var data: DataTable<T>? = nil
     
     
-    var success: Bool = false
-    var page: Int = -1
-    var totalCount: Int = -1
-    var perPage: Int = -1
-    var rows: [T] = [T]()
+//    var success: Bool = false
+//    var page: Int = -1
+//    var totalCount: Int = -1
+//    var perPage: Int = -1
+//    var rows: [T] = [T]()
     
     required init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        success = try container.decode(Bool.self, forKey: .success)
-        page = try container.decode(Int.self, forKey: .page)
-        totalCount = try container.decode(Int.self, forKey: .totalCount)
-        perPage = try container.decode(Int.self, forKey: .perPage)
-        rows = try container.decode([T].self, forKey: .rows)
+        status = try container.decodeIfPresent(Int.self, forKey: .status) ?? 0
+        data = try container.decodeIfPresent(DataTable.self, forKey: .data) ?? nil
+        
+//        success = try container.decode(Bool.self, forKey: .success)
+//        page = try container.decode(Int.self, forKey: .page)
+//        totalCount = try container.decode(Int.self, forKey: .totalCount)
+//        perPage = try container.decode(Int.self, forKey: .perPage)
+//        rows = try container.decode([T].self, forKey: .rows)
     }
 }
 
@@ -131,7 +134,8 @@ class Table: Codable {
         
         tel = try container.decodeIfPresent(String.self, forKey: .tel) ?? ""
         mobile = try container.decodeIfPresent(String.self, forKey: .mobile) ?? ""
-        city_id = try container.decodeIfPresent(Int.self, forKey: .city_id) ?? -1
+        //city_id = try container.decodeIfPresent(Int.self, forKey: .city_id) ?? -1
+        do {city_id = try container.decode(Int.self, forKey: .city_id)}catch{city_id = 0}
     }
     
     public func filterRow(){

@@ -8,6 +8,18 @@
 
 import Foundation
 
+class WeekdaysTable: Codable {
+    var num: [Int] = [Int]()
+    var chinese: [String] = [String]()
+    
+    init(){}
+    required init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        num = try container.decodeIfPresent([Int].self, forKey: .num) ?? [Int]()
+        chinese = try container.decodeIfPresent([String].self, forKey: .chinese) ?? [String]()
+    }
+}
+
 class Team_WeekdaysTable: Table {
     
     var team_id: Int = -1

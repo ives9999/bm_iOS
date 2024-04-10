@@ -168,17 +168,18 @@ class MyTableVC: BaseViewController {
                 warning("無法從伺服器取得正確的json資料，請洽管理員")
             }
         } catch {
+            print(error)
             msg = "解析JSON字串時，得到空值，請洽管理員"
         }
         
         if (mysTable != nil) {
-            tables = mysTable!
-            if mysTable!.rows.count > 0 {
+            //tables = mysTable!
+            if mysTable!.data!.rows.count > 0 {
                 if (page == 1) {
                     lists1 = [TeamTable]()
                 }
                 
-                var teamRows: [TeamTable] = mysTable!.rows
+                var teamRows: [TeamTable] = mysTable!.data!.rows
                 var signupRows: [TeamTable] = [TeamTable]()
                 var notSignupRows: [TeamTable] = [TeamTable]()
                 for teamRow in teamRows {

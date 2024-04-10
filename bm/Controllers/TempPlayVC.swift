@@ -191,8 +191,8 @@ class TempPlayVC: MyTableVC {
         //let row: Dictionary<String, [String: Any]> = lists[indexPath.row]
         //let token: String = row[TOKEN_KEY]!["value"] as! String
         if mysTable != nil {
-            let myTable = mysTable!.rows[indexPath.row]
-            toShowTeam(token: myTable.token)
+            //let myTable = mysTable!.rows[indexPath.row]
+            //toShowTeam(token: myTable.token)
             //performSegue(withIdentifier: TO_SHOW_STORE, sender: teamTable.token)
         }
         //performSegue(withIdentifier: TO_TEMP_PLAY_SHOW, sender: token)
