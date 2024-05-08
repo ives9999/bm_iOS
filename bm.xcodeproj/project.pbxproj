@@ -137,6 +137,11 @@
 		B36D66C1229A828A00502D62 /* ManagerCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B36D66BF229A828A00502D62 /* ManagerCourseCell.xib */; };
 		B36E333A2542B996001336C2 /* StoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E33392542B996001336C2 /* StoreVC.swift */; };
 		B36E334425480007001336C2 /* ShowStoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E334325480007001336C2 /* ShowStoreVC.swift */; };
+		B370AEC02BEB221E007220D7 /* BaseV2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370AEBF2BEB221E007220D7 /* BaseV2VC.swift */; };
+		B370AEC22BEB28C8007220D7 /* ArenaReadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370AEC12BEB28C8007220D7 /* ArenaReadVC.swift */; };
+		B370AEC42BEB28F1007220D7 /* ArenaReadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370AEC32BEB28F1007220D7 /* ArenaReadViewModel.swift */; };
+		B370AEC62BEB2909007220D7 /* ArenaReadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370AEC52BEB2909007220D7 /* ArenaReadModel.swift */; };
+		B370AEC82BEB3621007220D7 /* ArenaReadDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370AEC72BEB3621007220D7 /* ArenaReadDao.swift */; };
 		B370EFAD26A836470022E599 /* CartTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370EFAC26A836470022E599 /* CartTable.swift */; };
 		B370EFB226A849120022E599 /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370EFB126A849120022E599 /* CartService.swift */; };
 		B370EFBF26AD3F2B0022E599 /* MemberCartListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370EFBE26AD3F2B0022E599 /* MemberCartListVC.swift */; };
@@ -615,6 +620,11 @@
 		B36D66BF229A828A00502D62 /* ManagerCourseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManagerCourseCell.xib; sourceTree = "<group>"; };
 		B36E33392542B996001336C2 /* StoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreVC.swift; sourceTree = "<group>"; };
 		B36E334325480007001336C2 /* ShowStoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowStoreVC.swift; sourceTree = "<group>"; };
+		B370AEBF2BEB221E007220D7 /* BaseV2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseV2VC.swift; sourceTree = "<group>"; };
+		B370AEC12BEB28C8007220D7 /* ArenaReadVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaReadVC.swift; sourceTree = "<group>"; };
+		B370AEC32BEB28F1007220D7 /* ArenaReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaReadViewModel.swift; sourceTree = "<group>"; };
+		B370AEC52BEB2909007220D7 /* ArenaReadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaReadModel.swift; sourceTree = "<group>"; };
+		B370AEC72BEB3621007220D7 /* ArenaReadDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaReadDao.swift; sourceTree = "<group>"; };
 		B370EFAC26A836470022E599 /* CartTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTable.swift; sourceTree = "<group>"; };
 		B370EFB126A849120022E599 /* CartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
 		B370EFBE26AD3F2B0022E599 /* MemberCartListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCartListVC.swift; sourceTree = "<group>"; };
@@ -1295,6 +1305,41 @@
 			path = Form;
 			sourceTree = "<group>";
 		};
+		B370AEBA2BEB2185007220D7 /* arena */ = {
+			isa = PBXGroup;
+			children = (
+				B370AEBE2BEB21C2007220D7 /* show */,
+				B370AEBD2BEB21BB007220D7 /* read */,
+			);
+			path = arena;
+			sourceTree = "<group>";
+		};
+		B370AEBC2BEB21B5007220D7 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				B370AEBF2BEB221E007220D7 /* BaseV2VC.swift */,
+			);
+			path = base;
+			sourceTree = "<group>";
+		};
+		B370AEBD2BEB21BB007220D7 /* read */ = {
+			isa = PBXGroup;
+			children = (
+				B370AEC12BEB28C8007220D7 /* ArenaReadVC.swift */,
+				B370AEC32BEB28F1007220D7 /* ArenaReadViewModel.swift */,
+				B370AEC52BEB2909007220D7 /* ArenaReadModel.swift */,
+				B370AEC72BEB3621007220D7 /* ArenaReadDao.swift */,
+			);
+			path = read;
+			sourceTree = "<group>";
+		};
+		B370AEBE2BEB21C2007220D7 /* show */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = show;
+			sourceTree = "<group>";
+		};
 		B37A13431FDAF38C00413E64 /* Button */ = {
 			isa = PBXGroup;
 			children = (
@@ -1614,6 +1659,8 @@
 		F9D48D322BEA916D00EDBAA8 /* v2 */ = {
 			isa = PBXGroup;
 			children = (
+				B370AEBC2BEB21B5007220D7 /* base */,
+				B370AEBA2BEB2185007220D7 /* arena */,
 			);
 			path = v2;
 			sourceTree = "<group>";
@@ -2079,6 +2126,7 @@
 				B33C1ABB21BD2DED006F2BEB /* ColorFormItem.swift in Sources */,
 				B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */,
 				B3E72A241FA08D090008A6B1 /* GradientView.swift in Sources */,
+				B370AEC82BEB3621007220D7 /* ArenaReadDao.swift in Sources */,
 				B39E5FAB263ED55400C40BA7 /* ShowTeamVC.swift in Sources */,
 				B3B758E525B0759B006ACC33 /* WeightFormItem.swift in Sources */,
 				F9C6648029FCCA37005C1905 /* Date.swift in Sources */,
@@ -2116,6 +2164,7 @@
 				B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */,
 				B306FE9F21F0DC5900403FE2 /* DateCell.swift in Sources */,
 				F9C6648229FE4213005C1905 /* MatchPlayerService.swift in Sources */,
+				B370AEC02BEB221E007220D7 /* BaseV2VC.swift in Sources */,
 				B3D58D062A0B6891008524CC /* AttributesView.swift in Sources */,
 				B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */,
 				B3C4952A26287D1100D4F727 /* TeamListCell.swift in Sources */,
@@ -2136,12 +2185,14 @@
 				F99DF39F28715E4C00A7C2C6 /* WebViewVC.swift in Sources */,
 				B39453DE2232948F005E3027 /* PNCell.swift in Sources */,
 				B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */,
+				B370AEC42BEB28F1007220D7 /* ArenaReadViewModel.swift in Sources */,
 				B31739ED21763CD1004CFEDE /* ArenaMapVC.swift in Sources */,
 				B316FED62112F13600FB990C /* CollectionCell.swift in Sources */,
 				B30C954E1FECDE9E005F71EF /* IconTextField.swift in Sources */,
 				B3ED38DD1FB4A06C0003F083 /* MyLabel.swift in Sources */,
 				B3426B982A3821190018ED2C /* IconText2.swift in Sources */,
 				F9E221C729C4774D0054CF7B /* IconTextVertical2.swift in Sources */,
+				B370AEC22BEB28C8007220D7 /* ArenaReadVC.swift in Sources */,
 				F9CB7F3E298FFE0900C1B92F /* ShowLike2.swift in Sources */,
 				F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */,
 				F9C664862A052D07005C1905 /* MatchTeamService.swift in Sources */,
@@ -2193,6 +2244,7 @@
 				B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */,
 				B38755322A270098008B75F4 /* Array.swift in Sources */,
 				F9FFD8AD2909406200AD8E52 /* ShowSignupCell.swift in Sources */,
+				B370AEC62BEB2909007220D7 /* ArenaReadModel.swift in Sources */,
 				F9C6648A2A052F10005C1905 /* MatchTeamTable.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */,
 				F99DF39D286B393300A7C2C6 /* MemberBankVC.swift in Sources */,
