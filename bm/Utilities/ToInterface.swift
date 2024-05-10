@@ -46,13 +46,9 @@ extension BaseViewController {
     
     func toArena(member_like: Bool=false, isShowPrev: Bool=false) {
         if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "More", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "toArena") as? ArenaVC {
-                viewController.member_like = member_like
-                viewController.isShowPrev = isShowPrev
-                viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
-            }
+            let v: ArenaReadVC = ArenaReadVC()
+            v.modalPresentationStyle = .fullScreen
+            show(v, sender: nil)
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toArena") as! ArenaVC
             viewController.member_like = member_like
