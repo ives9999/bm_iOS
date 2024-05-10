@@ -518,6 +518,12 @@ class Member {
         }
     }
     
+    init() {}
+    
+    required init(from decoder: any Decoder) throws {
+        
+    }
+    
     func reset() {
         
         var mirror: Mirror? = Mirror(reflecting: MemberTable())
