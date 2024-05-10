@@ -16,10 +16,10 @@ class ApiService {
     func get(_url: String, params: [String: String]) async throws -> Data {
         var query: String = ""
         for (key, value) in params {
-            query += key + "=" + value
+            query += key + "=" + value + "&"
         }
         
-        var url = _url + "?" + query
+        let url = _url + "?" + query
         print(url)
         
         let (data, _) = try await URLSession.shared.data(from: URL(string: url)!)
