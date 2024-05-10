@@ -17,6 +17,7 @@ class ArenaReadVC: BaseV2VC {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        viewModel = ArenaReadViewModel(repository: ArenaReadRepository())
     }
     
 
