@@ -9,9 +9,11 @@
 import Foundation
 
 class ArenaReadViewModel {
+    
     let repository: ArenaReadRepository
+    
     init(repository: ArenaReadRepository) {
         self.repository = repository
-        repository.getRead(page: 1, perpage: PERPAGE)
+        let dao = repository.getRead(page: 1, perpage: PERPAGE)
     }
 }

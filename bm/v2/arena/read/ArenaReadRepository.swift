@@ -15,14 +15,19 @@ class ArenaReadRepository {
         apiService = ApiService()
     }
     
-    func getRead(page: Int, perpage: Int, otherParams: [String: String]? = nil) {
+    func getRead(page: Int, perpage: Int, otherParams: [String: String]? = nil)-> ArenaReadDao {
         let url: String = URL_ARENA_LIST
         
-        Task {
-        var params: [String: String] = ["page": String(page), "perpage": String(perpage)]
-        params = otherParams != nil ? params.merging(otherParams!, uniquingKeysWith: {$1}) : params
+        Task.init {
+            var params: [String: String] = ["page": String(page), "perpage": String(perpage)]
+            params = otherParams != nil ? params.merging(otherParams!, uniquingKeysWith: {$1}) : params
         
-            let response = try await apiService.get(_url: url, params: params)
+            do {
+                let dao: ArenaReadDao = try await apiService.get(_url: url, params: params)
+                return dao
+            } catch {
+                
+            }
         }
     }
 }

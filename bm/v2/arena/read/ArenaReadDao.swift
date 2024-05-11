@@ -11,7 +11,7 @@ import Foundation
 class ArenaReadDao: Codable {
     
     var status: Int = 500
-        //var data: ArenaData = ArenaData()
+    var data: ArenaData = ArenaData()
     
     class ArenaData: Codable {
         var rows: [Arena] = [Arena]()
