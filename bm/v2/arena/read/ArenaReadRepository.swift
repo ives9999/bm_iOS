@@ -26,8 +26,9 @@ class ArenaReadRepository {
                 let dao: ArenaReadDao = try await apiService.get(_url: url, params: params)
                 return dao
             } catch {
-                
+                return ArenaReadDao()
             }
         }
+        return ArenaReadDao()
     }
 }

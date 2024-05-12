@@ -9,11 +9,20 @@
 import UIKit
 
 class BaseV2VC: UIViewController {
+    
+    var showTop2: ShowTop2?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    func initTop() {
+        showTop2 = ShowTop2()
+        showTop2!.anchor(parent: self.view)
+        showTop2!.setTitle("球館")
+        showTop2!.showLog()
     }
     
 
