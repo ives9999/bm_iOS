@@ -15,10 +15,10 @@ class ArenaReadRepository {
         apiService = ApiService()
     }
     
-    func getRead(page: Int, perpage: Int, otherParams: [String: String]? = nil)-> ArenaReadDao {
+    func getRead(page: Int, perpage: Int, otherParams: [String: String]? = nil)-> Result<ArenaReadDao, Error> {
         let url: String = URL_ARENA_LIST
         
-        Task.init {
+        Task {
             var params: [String: String] = ["page": String(page), "perpage": String(perpage)]
             params = otherParams != nil ? params.merging(otherParams!, uniquingKeysWith: {$1}) : params
         
