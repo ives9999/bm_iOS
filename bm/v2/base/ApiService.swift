@@ -13,7 +13,7 @@ class ApiService {
     
     static let instance = ApiService()
     
-    func get(_url: String, params: [String: String]) async throws -> ArenaReadDao {
+    func get(_url: String, params: [String: String]) async throws -> LoginResult {
         var query: String = ""
         for (key, value) in params {
             query += key + "=" + value + "&"
@@ -24,9 +24,20 @@ class ApiService {
         print(url)
         
         let (data, _) = try await URLSession.shared.data(from: URL(string: url)!)
-        let arenaReadDao: ArenaReadDao = try JSONDecoder().decode(ArenaReadDao.self, from: data)
-        print(arenaReadDao)
+        let dao: ArenaReadDao = try JSONDecoder().decode(ArenaReadDao.self, from: data)
+        print(dao)
         
-        return arenaReadDao
+        if (dao.status == 200) {
+            return .success(dao)
+        } else {
+            return .failure("fail")
+        }
+        
+        //return arenaReadDao
     }
+}
+
+enum LoginResult {
+  case success(ArenaReadDao)
+  case failure(String)
 }
