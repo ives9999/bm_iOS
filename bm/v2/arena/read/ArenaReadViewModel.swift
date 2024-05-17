@@ -12,12 +12,13 @@ class ArenaReadViewModel {
     
     //let repository: ArenaReadRepository
     var isLoading: Observable = Observable<Bool>()
-    
-    init(repository: ArenaReadRepository) {
+    var dao: Observable = Observable<ArenaReadDao>()
+    //let repository: ArenaReadRepository = ArenaReadRepository()
+    //init(repository: ArenaReadRepository) {
         
         //self.repository = repository
         
-    }
+    //}
     
     func getData() {
         isLoading.value = true
@@ -32,14 +33,15 @@ class ArenaReadViewModel {
                 switch result {
                 case .success(let dao):
                     dao.printDao()
+                    self.dao.value = dao
                     //return dao
                 case .failure(let error):
                     print(error)
                 }
-                isLoading.value = false
+                self.isLoading.value = false
             } catch {
                 //return ArenaReadDao()
-                isLoading.value = false
+                self.isLoading.value = false
             }
         }
     }

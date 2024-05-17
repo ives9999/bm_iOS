@@ -11,23 +11,41 @@ import UIKit
 class ArenaReadVC: BaseV2VC {
     
     private var viewModel: ArenaReadViewModel?
-    private lazy var tableView: UITableView = UITableView()
+    
+    var mainBottom2: MainBottom2 = MainBottom2(able_type: "arena")
+    private lazy var tableView: UITableView = {
+        let view = UITableView()
+        view.backgroundColor = UIColor(bg_950)
+        view.estimatedRowHeight = 44
+        view.rowHeight = UITableView.automaticDimension
+        return view
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         initView()
-        viewModel = ArenaReadViewModel(repository: ArenaReadRepository())
+        viewModel = ArenaReadViewModel()
         
         viewModel!.isLoading.bind { [weak self] (isLoading) in
             guard let isLoading = isLoading else { return }
             DispatchQueue.main.async {
-                print("isLoading: \(isLoading)")
+                //print("isLoading: \(isLoading)")
+                if !isLoading {
+                    Global.instance.removeSpinner(superView: self!.view)
+                }
             }
         }
         
-        viewModel!.getData()
+        viewModel!.dao.bind { [weak self] (dao) in
+            guard let dao = dao else { return }
+            DispatchQueue.main.async {
+                self!.tableView.reloadData()
+            }
+        }
+        
+        initData()
     }
     
     // MARK: - init view for controller
@@ -45,19 +63,42 @@ class ArenaReadVC: BaseV2VC {
             make.top.equalTo(showTop2!.snp.bottom)
             make.height.equalTo(50)
         }
+        
+        self.view.addSubview(mainBottom2)
+        mainBottom2.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(72)
+        }
+        self.view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(filterContainer.snp.bottom).offset(12)
+            make.bottom.equalTo(mainBottom2.snp.top)
+        }
+        
+        mainBottom2.delegate = self
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func initData() {
+        Global.instance.addSpinner(superView: self.view)
+        viewModel!.getData()
     }
-    */
+}
 
+extension ArenaReadVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return UITableViewCell()
+    }
+    
+    
+}
+
+extension ArenaReadVC: UITableViewDelegate {
+    
 }
 
 extension ArenaReadVC: UITextFieldDelegate {
@@ -65,6 +106,21 @@ extension ArenaReadVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension ArenaReadVC: MainBottom2Delegate {
+    
+    func to(able_type: String) {
+//        switch able_type {
+//        case "team": toSearch()
+//        case "course": toCourse()
+//        case "member": toMember()
+//        case "arena": toArena()
+//        case "more": toMore()
+//        default:
+//            toTeam()
+//        }
     }
 }
 
