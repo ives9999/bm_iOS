@@ -11,6 +11,7 @@ import UIKit
 class ArenaReadVC: BaseV2VC {
     
     private var viewModel: ArenaReadViewModel?
+    private var dao: ArenaReadDao = ArenaReadDao()
     
     var mainBottom2: MainBottom2 = MainBottom2(able_type: "arena")
     private lazy var tableView: UITableView = {
@@ -18,6 +19,8 @@ class ArenaReadVC: BaseV2VC {
         view.backgroundColor = UIColor(bg_950)
         view.estimatedRowHeight = 44
         view.rowHeight = UITableView.automaticDimension
+        
+        view.register(read_arena.self, forCellReuseIdentifier: "read_arena")
         return view
     }()
 
@@ -26,6 +29,10 @@ class ArenaReadVC: BaseV2VC {
 
         // Do any additional setup after loading the view.
         initView()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         viewModel = ArenaReadViewModel()
         
         viewModel!.isLoading.bind { [weak self] (isLoading) in
@@ -41,6 +48,7 @@ class ArenaReadVC: BaseV2VC {
         viewModel!.dao.bind { [weak self] (dao) in
             guard let dao = dao else { return }
             DispatchQueue.main.async {
+                self!.dao = dao
                 self!.tableView.reloadData()
             }
         }
@@ -52,7 +60,7 @@ class ArenaReadVC: BaseV2VC {
     override func initView() {
         super.initView()
         
-        var filterContainer: UIView = {
+        let filterContainer: UIView = {
             let view = UIView()
             view.backgroundColor = UIColor.white
             return view
@@ -87,10 +95,13 @@ class ArenaReadVC: BaseV2VC {
 
 extension ArenaReadVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return dao.data.rows.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "read_arena", for: indexPath) as? read_arena {
+            return cell
+        }
         return UITableViewCell()
     }
     
