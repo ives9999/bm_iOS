@@ -18,6 +18,12 @@ class BaseV2VC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    // MARK: - init view for controller
+    func initView() {
+        self.view.backgroundColor = UIColor(bg_950)
+        initTop()
+    }
+    
     func initTop() {
         showTop2 = ShowTop2()
         showTop2!.anchor(parent: self.view)

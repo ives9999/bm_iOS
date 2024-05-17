@@ -110,6 +110,16 @@ class ArenaReadDao: Codable {
             area_name = try container.decodeIfPresent(String.self, forKey: .area_name) ?? ""
         }
     }
+    
+    func printDao() {
+        var mirror: Mirror? = Mirror(reflecting: self)
+        repeat {
+            for property in mirror!.children {
+                print("\(property.label ?? ""): \(property.value)")
+            }
+            mirror = mirror?.superclassMirror
+        } while mirror != nil
+    }
 }
 
 

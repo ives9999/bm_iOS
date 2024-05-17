@@ -325,6 +325,8 @@
 		B3FB9B272407F7EE0051186F /* TempPlay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FB9B262407F7EE0051186F /* TempPlay.storyboard */; };
 		B3FED2232A9466DF000D156B /* IconText.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FED2222A9466DF000D156B /* IconText.swift */; };
 		F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90423B81F83748C00DC8B1E /* TeamVC.swift */; };
+		F90BC2B22BF511B100EBF038 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90BC2B12BF511B100EBF038 /* Observable.swift */; };
+		F90BC2B52BF66C4900EBF038 /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90BC2B42BF66C4900EBF038 /* color.swift */; };
 		F92FF17028A941280005956D /* MemberSubscriptionPayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92FF16F28A941280005956D /* MemberSubscriptionPayVC.swift */; };
 		F9308B3B2737743F002531A1 /* IconTextSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3A2737743F002531A1 /* IconTextSection.swift */; };
 		F9308B3E273954AB002531A1 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3C273954AB002531A1 /* SwitchCell.swift */; };
@@ -814,6 +816,8 @@
 		B45D9C2D818D36544B377579 /* Pods-bm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bm.release.xcconfig"; path = "Target Support Files/Pods-bm/Pods-bm.release.xcconfig"; sourceTree = "<group>"; };
 		F796700863B6B0A46E3DE6B9 /* Pods_bmNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bmNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
+		F90BC2B12BF511B100EBF038 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		F90BC2B42BF66C4900EBF038 /* color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
 		F92FF16F28A941280005956D /* MemberSubscriptionPayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSubscriptionPayVC.swift; sourceTree = "<group>"; };
 		F9308B3A2737743F002531A1 /* IconTextSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextSection.swift; sourceTree = "<group>"; };
 		F9308B3C273954AB002531A1 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
@@ -1319,8 +1323,10 @@
 		B370AEBC2BEB21B5007220D7 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				F90BC2B32BF66C1700EBF038 /* Resource */,
 				B370AEBF2BEB221E007220D7 /* BaseV2VC.swift */,
 				B370AEC92BEDC62D007220D7 /* ApiService.swift */,
+				F90BC2B12BF511B100EBF038 /* Observable.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -1415,6 +1421,14 @@
 				F796700863B6B0A46E3DE6B9 /* Pods_bmNotificationServiceExtension.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F90BC2B32BF66C1700EBF038 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				F90BC2B42BF66C4900EBF038 /* color.swift */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		F93095F72948AD8A006C625C /* extensions */ = {
@@ -2201,6 +2215,7 @@
 				F9C664862A052D07005C1905 /* MatchTeamService.swift in Sources */,
 				B3756EEF21BA6F19006893E1 /* StatusSelectVC.swift in Sources */,
 				B36E334425480007001336C2 /* ShowStoreVC.swift in Sources */,
+				F90BC2B22BF511B100EBF038 /* Observable.swift in Sources */,
 				F9E221C929C9F0690054CF7B /* MainTextField2.swift in Sources */,
 				B3ED38DB1FB488CB0003F083 /* ImagePickerView.swift in Sources */,
 				B313272229A5C8EC00EAB782 /* NOLabel2.swift in Sources */,
@@ -2394,6 +2409,7 @@
 				B3E4D1CD2602DD7E00D78210 /* ArenaTable.swift in Sources */,
 				F983441629EEEE950050B634 /* MatchTable.swift in Sources */,
 				B3A253E4256BCBB8004B8A03 /* AreaFormItem.swift in Sources */,
+				F90BC2B52BF66C4900EBF038 /* color.swift in Sources */,
 				B33C1ABF21BD7F2C006F2BEB /* WeekdayFormItem.swift in Sources */,
 				B337B9A91FE2986B00C3EE28 /* TempPlayTableHeaderView.swift in Sources */,
 				F9C664842A040BFE005C1905 /* Data.swift in Sources */,

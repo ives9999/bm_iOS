@@ -25,7 +25,7 @@ class ApiService {
         
         let (data, _) = try await URLSession.shared.data(from: URL(string: url)!)
         let dao: ArenaReadDao = try JSONDecoder().decode(ArenaReadDao.self, from: data)
-        print(dao)
+        //print(dao)
         
         if (dao.status == 200) {
             return .success(dao)
