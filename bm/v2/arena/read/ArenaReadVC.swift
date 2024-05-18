@@ -62,7 +62,7 @@ class ArenaReadVC: BaseV2VC {
         
         let filterContainer: UIView = {
             let view = UIView()
-            view.backgroundColor = UIColor.white
+            //view.backgroundColor = UIColor.white
             return view
         }()
         self.view.addSubview(filterContainer)
@@ -100,6 +100,8 @@ extension ArenaReadVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "read_arena", for: indexPath) as? read_arena {
+            let row: ArenaReadDao.Arena = self.dao.data.rows[indexPath.row]
+            cell.update(row: row)
             return cell
         }
         return UITableViewCell()
