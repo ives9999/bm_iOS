@@ -69,7 +69,7 @@ class read_arena: UITableViewCell {
         featruedIV.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             make.centerY.centerX.equalToSuperview()
-            //make.height.equalTo(90)
+            make.height.width.equalTo(90)
 //            make.left.top.equalToSuperview().offset(8)
 //            make.right.bottom.equalToSuperview().offset(-8)
         }
@@ -92,8 +92,12 @@ class read_arena: UITableViewCell {
         }
         
         if (featured_path != nil) {
-            let width = container.frame.width
-            let height = featruedIV.heightForUrl(url: featured_path!, width: container.frame.width)
+            let width = self.frame.width - 8
+            let height = featruedIV.heightForUrl(url: featured_path!, width: width)
+            featruedIV.snp.updateConstraints { make in
+                make.width.equalTo(width)
+                make.height.equalTo(height)
+            }
             featruedIV.downloaded(from: featured_path!, isCircle: false)
         }
         nameLbl.text = row.name

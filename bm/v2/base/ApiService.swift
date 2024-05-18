@@ -24,6 +24,7 @@ class ApiService {
         print(url)
         
         let (data, _) = try await URLSession.shared.data(from: URL(string: url)!)
+        //data.prettyPrintedJSONString
         let dao: ArenaReadDao = try JSONDecoder().decode(ArenaReadDao.self, from: data)
         //print(dao)
         

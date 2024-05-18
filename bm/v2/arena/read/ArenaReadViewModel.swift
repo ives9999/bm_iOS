@@ -40,7 +40,7 @@ class ArenaReadViewModel {
                 }
                 self.isLoading.value = false
             } catch {
-                //return ArenaReadDao()
+                print(error)
                 self.isLoading.value = false
             }
         }
