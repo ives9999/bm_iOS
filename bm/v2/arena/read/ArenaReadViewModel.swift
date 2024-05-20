@@ -20,7 +20,7 @@ class ArenaReadViewModel {
         
     //}
     
-    func getData() {
+    func getData(page: Int, perpage: Int = PERPAGE, otherParams: [String: String]? = nil) {
         isLoading.value = true
         let url: String = URL_ARENA_LIST
         Task {

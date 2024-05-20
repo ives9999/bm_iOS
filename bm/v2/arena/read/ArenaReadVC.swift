@@ -32,6 +32,7 @@ class ArenaReadVC: BaseV2VC {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.prefetchDataSource = self
         
         viewModel = ArenaReadViewModel()
         
@@ -53,7 +54,7 @@ class ArenaReadVC: BaseV2VC {
             }
         }
         
-        initData()
+        getData()
     }
     
     // MARK: - init view for controller
@@ -87,9 +88,9 @@ class ArenaReadVC: BaseV2VC {
         mainBottom2.delegate = self
     }
     
-    func initData() {
+    func getData(page: Int = 1) {
         Global.instance.addSpinner(superView: self.view)
-        viewModel!.getData()
+        viewModel!.getData(page: page)
     }
 }
 
@@ -101,17 +102,29 @@ extension ArenaReadVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "read_arena", for: indexPath) as? read_arena {
             let row: ArenaReadDao.Arena = self.dao.data.rows[indexPath.row]
-            cell.update(row: row)
+            cell.update(row: row, idx: indexPath.row + 1)
             return cell
         }
         return UITableViewCell()
     }
-    
-    
 }
 
 extension ArenaReadVC: UITableViewDelegate {
     
+}
+
+extension ArenaReadVC: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        // fetch data from API for those rows are being prefetched (near to visible area)
+        for indexPath in indexPaths {
+            getData(page: indexPath.row)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        
+    }
 }
 
 extension ArenaReadVC: UITextFieldDelegate {
