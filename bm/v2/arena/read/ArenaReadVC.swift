@@ -117,9 +117,10 @@ extension ArenaReadVC: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         
         // fetch data from API for those rows are being prefetched (near to visible area)
-        for indexPath in indexPaths {
-            getData(page: indexPath.row)
-        }
+        print("prefetchRowsAt \(indexPaths)")
+//        for indexPath in indexPaths {
+//            getData(page: indexPath.row)
+//        }
     }
     
     func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
