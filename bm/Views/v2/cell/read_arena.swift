@@ -32,6 +32,7 @@ class read_arena: UITableViewCell {
         view.layer.cornerRadius = 6
         view.clipsToBounds = true
         //view.backgroundColor = UIColor.yellow
+        view.isUserInteractionEnabled = true
         
         return view
     }()
@@ -87,6 +88,7 @@ class read_arena: UITableViewCell {
         view.setTextSize(18)
         view.setTextColor(UIColor(bg_300))
         view.text = "更多..."
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -107,6 +109,9 @@ class read_arena: UITableViewCell {
     
     private func setupView() {
         backgroundColor = UIColor(bg_950)
+//        let imageGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toArenaShow))
+//        featruedIV.addGestureRecognizer(imageGR)
+        
         anchor()
     }
     
@@ -222,6 +227,13 @@ class read_arena: UITableViewCell {
         avatarIV.downloaded(from: row.member.avatar)
         memberNameLbl.text = row.member.nickname
         createdLbl.text = row.created_at.noSec()
+        
+        let moreGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toArenaShow))
+        moreGR.cancelsTouchesInView = true
+        moreLbl.addGestureRecognizer(moreGR)
     }
 
+    @objc func toArenaShow() {
+        print("press")
+    }
 }

@@ -24,7 +24,7 @@ class ArenaReadViewModel {
         isLoading.value = true
         let url: String = URL_ARENA_LIST
         Task {
-            var params: [String: String] = ["page": "1", "perpage": String(PERPAGE)]
+            var params: [String: String] = ["page": String(page), "perpage": String(PERPAGE)]
             //params = otherParams != nil ? params.merging(otherParams!, uniquingKeysWith: {$1}) : params
             
             do {

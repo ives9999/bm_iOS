@@ -12,6 +12,7 @@ class ArenaReadVC: BaseV2VC {
     
     private var viewModel: ArenaReadViewModel?
     private var dao: ArenaReadDao = ArenaReadDao()
+    private var list: [ArenaReadDao.Arena] = [ArenaReadDao.Arena]()
     
     var mainBottom2: MainBottom2 = MainBottom2(able_type: "arena")
     private lazy var tableView: UITableView = {
@@ -50,6 +51,7 @@ class ArenaReadVC: BaseV2VC {
             guard let dao = dao else { return }
             DispatchQueue.main.async {
                 self!.dao = dao
+                self!.list += dao.data.rows
                 self!.tableView.reloadData()
             }
         }
@@ -89,6 +91,9 @@ class ArenaReadVC: BaseV2VC {
     }
     
     func getData(page: Int = 1) {
+        if page == 1 {
+            list = [ArenaReadDao.Arena]()
+        }
         Global.instance.addSpinner(superView: self.view)
         viewModel!.getData(page: page)
     }
@@ -96,12 +101,12 @@ class ArenaReadVC: BaseV2VC {
 
 extension ArenaReadVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dao.data.rows.count
+        return list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "read_arena", for: indexPath) as? read_arena {
-            let row: ArenaReadDao.Arena = self.dao.data.rows[indexPath.row]
+            let row: ArenaReadDao.Arena = self.list[indexPath.row]
             cell.update(row: row, idx: indexPath.row + 1)
             return cell
         }
@@ -111,15 +116,33 @@ extension ArenaReadVC: UITableViewDataSource {
 
 extension ArenaReadVC: UITableViewDelegate {
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("indexPath: \(indexPath.row)")
+//    }
+    
 }
 
 extension ArenaReadVC: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         
         // fetch data from API for those rows are being prefetched (near to visible area)
-        print("prefetchRowsAt \(indexPaths)")
-//        for indexPath in indexPaths {
-//            getData(page: indexPath.row)
+        let idx: Int = indexPaths[0].row + 1
+        if idx > list.count-1 {
+            let r = idx.quotientAndRemainder(dividingBy: PERPAGE)
+            let pageIdx = r.quotient + 1
+            //print("pageIdx \(pageIdx)")
+            self.getData(page: pageIdx)
+        }
+        
+//        indexPaths.forEach {
+//            //print("prefetchRowsAt \($0.row)")
+//            let idx: Int = $0.row + 1
+//            if idx > list.count-1 {
+//                let r = idx.quotientAndRemainder(dividingBy: PERPAGE)
+//                let pageIdx = r.quotient + 1
+//                //print("pageIdx \(pageIdx)")
+//                self.getData(page: pageIdx)
+//            }
 //        }
     }
     
