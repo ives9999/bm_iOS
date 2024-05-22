@@ -20,6 +20,7 @@ class ArenaReadVC: BaseV2VC {
         view.backgroundColor = UIColor(bg_950)
         view.estimatedRowHeight = 44
         view.rowHeight = UITableView.automaticDimension
+        //view.allowsSelection = false
         
         view.register(read_arena.self, forCellReuseIdentifier: "read_arena")
         return view
@@ -31,9 +32,11 @@ class ArenaReadVC: BaseV2VC {
         // Do any additional setup after loading the view.
         initView()
         
-        tableView.delegate = self
+        self.view.isUserInteractionEnabled = true
+        
+        //tableView.delegate = self
         tableView.dataSource = self
-        tableView.prefetchDataSource = self
+        //tableView.prefetchDataSource = self
         
         viewModel = ArenaReadViewModel()
         
@@ -63,6 +66,24 @@ class ArenaReadVC: BaseV2VC {
     override func initView() {
         super.initView()
         
+        let textLbl: UILabel = {
+            let view = UILabel()
+            view.text = "text"
+            view.textColor = UIColor.white
+            view.isUserInteractionEnabled = true
+            return view
+        }()
+        
+        self.view.addSubview(textLbl)
+        textLbl.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(showTop2!.snp.bottom)
+            make.height.equalTo(50)
+        }
+        
+        let rg: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toText))
+        textLbl.addGestureRecognizer(rg)
+        
         let filterContainer: UIView = {
             let view = UIView()
             //view.backgroundColor = UIColor.white
@@ -71,7 +92,8 @@ class ArenaReadVC: BaseV2VC {
         self.view.addSubview(filterContainer)
         filterContainer.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(showTop2!.snp.bottom)
+            make.top.equalTo(textLbl.snp.bottom)
+            //make.top.equalTo(showTop2!.snp.bottom)
             make.height.equalTo(50)
         }
         
@@ -88,6 +110,10 @@ class ArenaReadVC: BaseV2VC {
         }
         
         mainBottom2.delegate = self
+    }
+    
+    @objc func toText() {
+        print("text")
     }
     
     func getData(page: Int = 1) {
@@ -114,50 +140,39 @@ extension ArenaReadVC: UITableViewDataSource {
     }
 }
 
-extension ArenaReadVC: UITableViewDelegate {
+//extension ArenaReadVC: UITableViewDelegate {
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        print("indexPath: \(indexPath.row)")
 //    }
     
-}
+//}
 
-extension ArenaReadVC: UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        
-        // fetch data from API for those rows are being prefetched (near to visible area)
-        let idx: Int = indexPaths[0].row + 1
-        if idx > list.count-1 {
-            let r = idx.quotientAndRemainder(dividingBy: PERPAGE)
-            let pageIdx = r.quotient + 1
-            //print("pageIdx \(pageIdx)")
-            self.getData(page: pageIdx)
-        }
-        
-//        indexPaths.forEach {
-//            //print("prefetchRowsAt \($0.row)")
-//            let idx: Int = $0.row + 1
-//            if idx > list.count-1 {
-//                let r = idx.quotientAndRemainder(dividingBy: PERPAGE)
-//                let pageIdx = r.quotient + 1
-//                //print("pageIdx \(pageIdx)")
-//                self.getData(page: pageIdx)
-//            }
+//extension ArenaReadVC: UITableViewDataSourcePrefetching {
+//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+//        
+//        // fetch data from API for those rows are being prefetched (near to visible area)
+//        let idx: Int = indexPaths[0].row + 1
+//        if idx > list.count-1 {
+//            let r = idx.quotientAndRemainder(dividingBy: PERPAGE)
+//            let pageIdx = r.quotient + 1
+//            //print("pageIdx \(pageIdx)")
+//            self.getData(page: pageIdx)
 //        }
-    }
-    
-    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-        
-    }
-}
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+//        
+//    }
+//}
 
-extension ArenaReadVC: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
+//extension ArenaReadVC: UITextFieldDelegate {
+//    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
+//}
 
 extension ArenaReadVC: MainBottom2Delegate {
     
