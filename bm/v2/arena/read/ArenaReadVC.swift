@@ -66,23 +66,23 @@ class ArenaReadVC: BaseV2VC {
     override func initView() {
         super.initView()
         
-        let textLbl: UILabel = {
-            let view = UILabel()
-            view.text = "text"
-            view.textColor = UIColor.white
-            view.isUserInteractionEnabled = true
-            return view
-        }()
+//        let textLbl: UILabel = {
+//            let view = UILabel()
+//            view.text = "text"
+//            view.textColor = UIColor.white
+//            view.isUserInteractionEnabled = true
+//            return view
+//        }()
+//        
+//        self.view.addSubview(textLbl)
+//        textLbl.snp.makeConstraints { make in
+//            make.left.right.equalToSuperview()
+//            make.top.equalTo(showTop2!.snp.bottom)
+//            make.height.equalTo(50)
+//        }
         
-        self.view.addSubview(textLbl)
-        textLbl.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(showTop2!.snp.bottom)
-            make.height.equalTo(50)
-        }
-        
-        let rg: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toText))
-        textLbl.addGestureRecognizer(rg)
+//        let rg: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toText))
+//        textLbl.addGestureRecognizer(rg)
         
         let filterContainer: UIView = {
             let view = UIView()
@@ -92,8 +92,8 @@ class ArenaReadVC: BaseV2VC {
         self.view.addSubview(filterContainer)
         filterContainer.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.top.equalTo(textLbl.snp.bottom)
-            //make.top.equalTo(showTop2!.snp.bottom)
+            //make.top.equalTo(textLbl.snp.bottom)
+            make.top.equalTo(showTop2!.snp.bottom)
             make.height.equalTo(50)
         }
         
@@ -140,39 +140,43 @@ extension ArenaReadVC: UITableViewDataSource {
     }
 }
 
-//extension ArenaReadVC: UITableViewDelegate {
+extension ArenaReadVC: UITableViewDelegate {
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("indexPath: \(indexPath.row)")
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //print("indexPath: \(indexPath.row)")
+        let vc: ArenaShowVC = ArenaShowVC()
+        vc.token = list[indexPath.row].token
+        vc.modalPresentationStyle = .fullScreen
+        show(vc, sender: nil)
+    }
     
-//}
+}
 
-//extension ArenaReadVC: UITableViewDataSourcePrefetching {
-//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        
-//        // fetch data from API for those rows are being prefetched (near to visible area)
-//        let idx: Int = indexPaths[0].row + 1
-//        if idx > list.count-1 {
-//            let r = idx.quotientAndRemainder(dividingBy: PERPAGE)
-//            let pageIdx = r.quotient + 1
-//            //print("pageIdx \(pageIdx)")
-//            self.getData(page: pageIdx)
-//        }
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
-//        
-//    }
-//}
+extension ArenaReadVC: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        // fetch data from API for those rows are being prefetched (near to visible area)
+        let idx: Int = indexPaths[0].row + 1
+        if idx > list.count-1 {
+            let r = idx.quotientAndRemainder(dividingBy: PERPAGE)
+            let pageIdx = r.quotient + 1
+            //print("pageIdx \(pageIdx)")
+            self.getData(page: pageIdx)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        
+    }
+}
 
-//extension ArenaReadVC: UITextFieldDelegate {
-//    
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
-//}
+extension ArenaReadVC: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
 
 extension ArenaReadVC: MainBottom2Delegate {
     

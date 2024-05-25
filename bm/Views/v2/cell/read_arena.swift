@@ -118,7 +118,7 @@ class read_arena: UITableViewCell {
     
     private func anchor() {
         
-        self.addSubview(container)
+        contentView.addSubview(container)
         container.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(4)
             make.right.equalToSuperview().offset(-4)
@@ -136,7 +136,7 @@ class read_arena: UITableViewCell {
 //            make.right.bottom.equalToSuperview().offset(-8)
         }
         
-        let rg: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toText))
+        let rg: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toArenaShow))
         rg.cancelsTouchesInView = true
         featruedIV.addGestureRecognizer(rg)
         
@@ -205,12 +205,12 @@ class read_arena: UITableViewCell {
             make.centerY.equalTo(avatarIV.snp.centerY)
         }
         
-        let rg1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toText))
-        rg1.cancelsTouchesInView = true
-        moreLbl.addGestureRecognizer(rg1)
-//        let moreGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toArenaShow))
-//        moreGR.cancelsTouchesInView = true
-//        moreLbl.addGestureRecognizer(moreGR)
+//        let rg1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toArenaShow))
+//        rg1.cancelsTouchesInView = true
+//        moreLbl.addGestureRecognizer(rg1)
+        let moreGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toArenaShow))
+        moreGR.cancelsTouchesInView = true
+        moreLbl.addGestureRecognizer(moreGR)
     }
 
     func update(row: ArenaReadDao.Arena, idx: Int) {
@@ -224,11 +224,11 @@ class read_arena: UITableViewCell {
         
         if (featured_path != nil) {
             let width = UIScreen.main.bounds.width - 32
-//            let height = featruedIV.heightForUrl(url: featured_path!, width: width)
-//            featruedIV.snp.updateConstraints { make in
-//                make.width.equalTo(width)
-//                make.height.equalTo(height)
-//            }
+            let height = featruedIV.heightForUrl(url: featured_path!, width: width)
+            featruedIV.snp.updateConstraints { make in
+                make.width.equalTo(width)
+                make.height.equalTo(height)
+            }
             featruedIV.downloaded(from: featured_path!, isCircle: false)
         }
         cityLbl.text = row.zone.city_name
@@ -239,10 +239,6 @@ class read_arena: UITableViewCell {
         avatarIV.downloaded(from: row.member.avatar)
         memberNameLbl.text = row.member.nickname
         createdLbl.text = row.created_at.noSec()
-    }
-    
-    @objc func toText() {
-        print("text")
     }
 
     @objc func toArenaShow(_ sender: UITapGestureRecognizer) {
