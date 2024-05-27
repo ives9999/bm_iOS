@@ -20,7 +20,7 @@ class ArenaReadViewModel {
         
     //}
     
-    func getData(page: Int, perpage: Int = PERPAGE, otherParams: [String: String]? = nil) {
+    func getList(page: Int, perpage: Int = PERPAGE, otherParams: [String: String]? = nil) {
         isLoading.value = true
         let url: String = URL_ARENA_LIST
         Task {
@@ -28,7 +28,7 @@ class ArenaReadViewModel {
             //params = otherParams != nil ? params.merging(otherParams!, uniquingKeysWith: {$1}) : params
             
             do {
-                let apiService = ApiService()
+                let apiService = ApiService<ArenaReadDao>()
                 let result = try await apiService.get(_url: url, params: params)
                 switch result {
                 case .success(let dao):
@@ -37,6 +37,8 @@ class ArenaReadViewModel {
                     //return dao
                 case .failure(let error):
                     print(error)
+                case .loading(let isLoading):
+                    print(isLoading)
                 }
                 self.isLoading.value = false
             } catch {

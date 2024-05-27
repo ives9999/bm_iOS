@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArenaReadVC: BaseV2VC {
+class ArenaReadVC: BaseV2VC, ArenaReadCellDelegate {
     
     private var viewModel: ArenaReadViewModel?
     private var dao: ArenaReadDao = ArenaReadDao()
@@ -20,23 +20,18 @@ class ArenaReadVC: BaseV2VC {
         view.backgroundColor = UIColor(bg_950)
         view.estimatedRowHeight = 44
         view.rowHeight = UITableView.automaticDimension
-        //view.allowsSelection = false
         
-        view.register(read_arena.self, forCellReuseIdentifier: "read_arena")
+        view.register(ArenaReadCell.self, forCellReuseIdentifier: "ArenaReadCell")
         return view
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
         initView()
-        
-        self.view.isUserInteractionEnabled = true
-        
-        //tableView.delegate = self
+        tableView.delegate = self
         tableView.dataSource = self
-        //tableView.prefetchDataSource = self
+        tableView.prefetchDataSource = self
         
         viewModel = ArenaReadViewModel()
         
@@ -66,24 +61,6 @@ class ArenaReadVC: BaseV2VC {
     override func initView() {
         super.initView()
         
-//        let textLbl: UILabel = {
-//            let view = UILabel()
-//            view.text = "text"
-//            view.textColor = UIColor.white
-//            view.isUserInteractionEnabled = true
-//            return view
-//        }()
-//        
-//        self.view.addSubview(textLbl)
-//        textLbl.snp.makeConstraints { make in
-//            make.left.right.equalToSuperview()
-//            make.top.equalTo(showTop2!.snp.bottom)
-//            make.height.equalTo(50)
-//        }
-        
-//        let rg: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toText))
-//        textLbl.addGestureRecognizer(rg)
-        
         let filterContainer: UIView = {
             let view = UIView()
             //view.backgroundColor = UIColor.white
@@ -112,16 +89,19 @@ class ArenaReadVC: BaseV2VC {
         mainBottom2.delegate = self
     }
     
-    @objc func toText() {
-        print("text")
-    }
-    
     func getData(page: Int = 1) {
         if page == 1 {
             list = [ArenaReadDao.Arena]()
         }
         Global.instance.addSpinner(superView: self.view)
-        viewModel!.getData(page: page)
+        viewModel!.getList(page: page)
+    }
+    
+    func toArenaShow(idx: Int) {
+        let vc: ArenaShowVC = ArenaShowVC()
+        vc.modalPresentationStyle = .fullScreen
+        vc.token = self.list[idx].token
+        show(vc, sender: nil)
     }
 }
 
@@ -131,9 +111,10 @@ extension ArenaReadVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "read_arena", for: indexPath) as? read_arena {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "ArenaReadCell", for: indexPath) as? ArenaReadCell {
+            cell.arenaReadCellDelegate = self
             let row: ArenaReadDao.Arena = self.list[indexPath.row]
-            cell.update(row: row, idx: indexPath.row + 1)
+            cell.update(row: row, idx: indexPath.row)
             return cell
         }
         return UITableViewCell()
@@ -170,13 +151,13 @@ extension ArenaReadVC: UITableViewDataSourcePrefetching {
     }
 }
 
-extension ArenaReadVC: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-}
+//extension ArenaReadVC: UITextFieldDelegate {
+//    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
+//}
 
 extension ArenaReadVC: MainBottom2Delegate {
     
@@ -193,6 +174,250 @@ extension ArenaReadVC: MainBottom2Delegate {
     }
 }
 
+class ArenaReadCell: UITableViewCell {
+    
+    var idx: Int = 0
+    var arenaReadCellDelegate: ArenaReadCellDelegate? = nil
+    
+    let container: UIView = {
+        let view: UIView = UIView()
+        view.layer.cornerRadius = 4
+        view.clipsToBounds = true
+        view.backgroundColor = UIColor(PrimaryBlock_950)
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor(gray_700).cgColor
+        return view
+    }()
+    
+    let memberContainer: UIView = {
+        let view: UIView = UIView()
+        //view.backgroundColor = UIColor.red
+        return view
+    }()
+    
+    let featuredIV: UIImageView = {
+        let view: UIImageView = UIImageView()
+        view.contentMode = .scaleAspectFill
+        view.layer.cornerRadius = 6
+        view.clipsToBounds = true
+        //view.backgroundColor = UIColor.yellow
+        view.isUserInteractionEnabled = true
+        
+        return view
+    }()
+    
+    let cityLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextColor(UIColor(bg_300))
+        view.setTextSize(14)
+        return view
+    }()
+    
+    let pvLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextColor(UIColor(bg_300))
+        view.setTextSize(14)
+        return view
+    }()
+    
+    let nameLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextSize(18)
+        view.setTextBold()
+        view.setTextColor(UIColor(Primary_300))
+        
+        return view
+    }()
+    
+    let avatarIV: UIImageView = {
+        let view: UIImageView = UIImageView()
+        view.contentMode = .scaleAspectFill
+        
+        return view
+    }()
+    
+    let memberNameLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextSize(15)
+        view.setTextColor(UIColor(bg_300))
+        
+        return view
+    }()
+    
+    let createdLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextSize(15)
+        view.setTextColor(UIColor(bg_300))
+        
+        return view
+    }()
+    
+    let moreLbl: UILabel = {
+        let view = UILabel()
+        view.textColor = UIColor(bg_300)
+        //view.setTextSize(18)
+        //view.setTextColor(UIColor(bg_300))
+        view.text = "更多..."
+        view.isUserInteractionEnabled = true
+        return view
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.setupView()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupView()
+    }
+    
+    private func setupView() {
+        backgroundColor = UIColor(bg_950)
+//        let imageGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toArenaShow))
+//        featruedIV.addGestureRecognizer(imageGR)
+        
+        anchor()
+    }
+    
+    private func anchor() {
+        
+        contentView.addSubview(container)
+        container.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(4)
+            make.right.equalToSuperview().offset(-4)
+            make.top.equalToSuperview().offset(12)
+            make.bottom.equalToSuperview().offset(-12)
+        }
+        
+        container.addSubview(featuredIV)
+        featuredIV.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(12)
+            make.left.equalToSuperview().offset(12)
+            //make.centerY.equalToSuperview()
+            make.height.width.equalTo(90)
+//            make.left.top.equalToSuperview().offset(8)
+//            make.right.bottom.equalToSuperview().offset(-8)
+        }
+        
+        let rg: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toArenaShow))
+        rg.cancelsTouchesInView = true
+        featuredIV.addGestureRecognizer(rg)
+        
+        container.addSubview(cityLbl)
+        cityLbl.snp.makeConstraints { make in
+            make.top.equalTo(featuredIV.snp.bottom).offset(12)
+            make.left.equalToSuperview().offset(12)
+        }
+        
+        container.addSubview(pvLbl)
+        pvLbl.snp.makeConstraints { make in
+            make.centerY.equalTo(cityLbl.snp.centerY)
+            make.right.equalToSuperview().offset(-12)
+        }
+        
+        let pvIcon: UIImageView = {
+            let view: UIImageView = UIImageView()
+            view.image = UIImage(named: "member_svg")
+            view.tintColor = UIColor(bg_300)
+            return view
+        }()
+        
+        container.addSubview(pvIcon)
+        pvIcon.snp.makeConstraints { make in
+            make.centerY.equalTo(cityLbl.snp.centerY)
+            make.right.equalTo(pvLbl.snp.left)
+            make.width.height.equalTo(16)
+        }
+        
+        container.addSubview(nameLbl)
+        nameLbl.snp.makeConstraints { make in
+            make.top.equalTo(cityLbl.snp.bottom).offset(18)
+            make.left.equalToSuperview().offset(12)
+        }
+        
+        container.addSubview(memberContainer)
+        memberContainer.snp.makeConstraints { make in
+            make.top.equalTo(nameLbl.snp.bottom).offset(18)
+            make.left.equalToSuperview().offset(12)
+            make.right.equalToSuperview().offset(-12)
+            make.bottom.equalToSuperview().offset(-20)
+        }
+        
+        memberContainer.addSubview(avatarIV)
+        avatarIV.snp.makeConstraints { make in
+            make.left.top.equalToSuperview()
+            make.width.height.equalTo(36)
+            make.bottom.equalToSuperview()
+        }
+        
+        memberContainer.addSubview(memberNameLbl)
+        memberNameLbl.snp.makeConstraints { make in
+            make.top.equalTo(avatarIV.snp.top)
+            make.left.equalTo(avatarIV.snp.right).offset(6)
+        }
+        
+        memberContainer.addSubview(createdLbl)
+        createdLbl.snp.makeConstraints { make in
+            make.bottom.equalTo(avatarIV.snp.bottom)
+            make.left.equalTo(avatarIV.snp.right).offset(6)
+        }
+        
+        memberContainer.addSubview(moreLbl)
+        moreLbl.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.centerY.equalTo(avatarIV.snp.centerY)
+        }
+        
+        let moreGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toArenaShow))
+        moreGR.cancelsTouchesInView = true
+        moreLbl.addGestureRecognizer(moreGR)
+    }
+
+    func update(row: ArenaReadDao.Arena, idx: Int) {
+        self.idx = idx
+        var featured_path: String? = nil
+        for image in row.images {
+            if (image.isFeatured) {
+                featured_path = image.path
+                break
+            }
+        }
+        
+        if (featured_path != nil) {
+            let width = UIScreen.main.bounds.width - 32
+            let height = featuredIV.heightForUrl(url: featured_path!, width: width)
+            featuredIV.snp.updateConstraints { make in
+                make.width.equalTo(width)
+                make.height.equalTo(height)
+            }
+            featuredIV.downloaded(from: featured_path!, isCircle: false)
+            featuredIV.tag = idx
+        }
+        cityLbl.text = row.zone.city_name
+        pvLbl.text = row.pv.formattedWithSeparator
+        
+        nameLbl.text = "\(idx + 1). \(row.name)"
+        
+        avatarIV.downloaded(from: row.member.avatar)
+        memberNameLbl.text = row.member.nickname
+        createdLbl.text = row.created_at.noSec()
+    }
+
+    @objc func toArenaShow(_ sender: UITapGestureRecognizer) {
+        //print(idx)
+        arenaReadCellDelegate?.toArenaShow(idx: idx)
+    }
+}
+
+protocol ArenaReadCellDelegate {
+    func toArenaShow(idx: Int)
+}
 
 
 

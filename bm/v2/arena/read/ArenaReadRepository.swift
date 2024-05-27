@@ -9,10 +9,10 @@
 import Foundation
 
 class ArenaReadRepository {
-    var apiService: ApiService
+    var apiService: ApiService<ArenaReadDao>
     
     init() {
-        apiService = ApiService()
+        apiService = ApiService<ArenaReadDao>()
     }
     
     
@@ -30,6 +30,8 @@ class ArenaReadRepository {
                     return dao
                 case .failure(let error):
                     print(error)
+                case .loading(let isLoading):
+                    print(isLoading)
                 }
             } catch {
                 return ArenaReadDao()

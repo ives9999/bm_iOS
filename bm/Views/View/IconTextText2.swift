@@ -120,6 +120,10 @@ class IconTextText2: UIView {
         showLbl.text = show
     }
     
+    func setIconColor(_ color: String) {
+        iconIV.tintColor = UIColor(color)
+    }
+    
     @objc func pressed(view: UITapGestureRecognizer) {
         delegate?.pressed(icon: icon)
     }

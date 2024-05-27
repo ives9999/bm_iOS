@@ -328,7 +328,9 @@
 		F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90423B81F83748C00DC8B1E /* TeamVC.swift */; };
 		F90BC2B22BF511B100EBF038 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90BC2B12BF511B100EBF038 /* Observable.swift */; };
 		F90BC2B52BF66C4900EBF038 /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90BC2B42BF66C4900EBF038 /* color.swift */; };
-		F90BC2B92BF75B6500EBF038 /* read_arena.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90BC2B82BF75B6500EBF038 /* read_arena.swift */; };
+		F90BC2FB2C02E10900EBF038 /* ArenaShowDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90BC2FA2C02E10900EBF038 /* ArenaShowDao.swift */; };
+		F90BC2FD2C02EA9100EBF038 /* ArenaShowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90BC2FC2C02EA9100EBF038 /* ArenaShowViewModel.swift */; };
+		F90BC2FF2C0326D600EBF038 /* BaseDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90BC2FE2C0326D600EBF038 /* BaseDao.swift */; };
 		F92FF17028A941280005956D /* MemberSubscriptionPayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92FF16F28A941280005956D /* MemberSubscriptionPayVC.swift */; };
 		F9308B3B2737743F002531A1 /* IconTextSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3A2737743F002531A1 /* IconTextSection.swift */; };
 		F9308B3E273954AB002531A1 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3C273954AB002531A1 /* SwitchCell.swift */; };
@@ -821,7 +823,9 @@
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
 		F90BC2B12BF511B100EBF038 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		F90BC2B42BF66C4900EBF038 /* color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
-		F90BC2B82BF75B6500EBF038 /* read_arena.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = read_arena.swift; sourceTree = "<group>"; };
+		F90BC2FA2C02E10900EBF038 /* ArenaShowDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaShowDao.swift; sourceTree = "<group>"; };
+		F90BC2FC2C02EA9100EBF038 /* ArenaShowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaShowViewModel.swift; sourceTree = "<group>"; };
+		F90BC2FE2C0326D600EBF038 /* BaseDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDao.swift; sourceTree = "<group>"; };
 		F92FF16F28A941280005956D /* MemberSubscriptionPayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSubscriptionPayVC.swift; sourceTree = "<group>"; };
 		F9308B3A2737743F002531A1 /* IconTextSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextSection.swift; sourceTree = "<group>"; };
 		F9308B3C273954AB002531A1 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
@@ -1332,6 +1336,7 @@
 				B370AEBF2BEB221E007220D7 /* BaseV2VC.swift */,
 				B370AEC92BEDC62D007220D7 /* ApiService.swift */,
 				F90BC2B12BF511B100EBF038 /* Observable.swift */,
+				F90BC2FE2C0326D600EBF038 /* BaseDao.swift */,
 			);
 			path = base;
 			sourceTree = "<group>";
@@ -1351,6 +1356,8 @@
 			isa = PBXGroup;
 			children = (
 				B3AA0B722C0033FA00C89424 /* ArenaShowVC.swift */,
+				F90BC2FC2C02EA9100EBF038 /* ArenaShowViewModel.swift */,
+				F90BC2FA2C02E10900EBF038 /* ArenaShowDao.swift */,
 			);
 			path = show;
 			sourceTree = "<group>";
@@ -1440,17 +1447,8 @@
 		F90BC2B62BF75A7F00EBF038 /* v2 */ = {
 			isa = PBXGroup;
 			children = (
-				F90BC2B72BF75A9100EBF038 /* cell */,
 			);
 			path = v2;
-			sourceTree = "<group>";
-		};
-		F90BC2B72BF75A9100EBF038 /* cell */ = {
-			isa = PBXGroup;
-			children = (
-				F90BC2B82BF75B6500EBF038 /* read_arena.swift */,
-			);
-			path = cell;
 			sourceTree = "<group>";
 		};
 		F93095F72948AD8A006C625C /* extensions */ = {
@@ -1963,79 +1961,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-bm/Pods-bm-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/AssistantKit/AssistantKit.framework",
-				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Device.swift/Device_swift.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
-				"${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/JXBanner/JXBanner.framework",
-				"${BUILT_PRODUCTS_DIR}/JXPageControl/JXPageControl.framework",
-				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/MercariQRScanner/MercariQRScanner.framework",
-				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
-				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
-				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
-				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyXMLParser/SwiftyXMLParser.framework",
-				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
-				"${BUILT_PRODUCTS_DIR}/TRVideoView/TRVideoView.framework",
-				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/YouTubePlayer/YouTubePlayer.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ECPayPaymentGatewayKit/ECPayPaymentGatewayKit.framework/ECPayPaymentGatewayKit",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignalXCFramework/OneSignal.framework/OneSignal",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignalXCFramework/OneSignalCore/OneSignalCore.framework/OneSignalCore",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignalXCFramework/OneSignalExtension/OneSignalExtension.framework/OneSignalExtension",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignalXCFramework/OneSignalOutcomes/OneSignalOutcomes.framework/OneSignalOutcomes",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bm/Pods-bm-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AssistantKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Device_swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreInternal.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseMessaging.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXBanner.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXPageControl.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MercariQRScanner.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyXMLParser.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TRVideoView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ECPayPaymentGatewayKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignal.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignalCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignalExtension.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignalOutcomes.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bm/Pods-bm-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2235,6 +2166,7 @@
 				F9CB7F3E298FFE0900C1B92F /* ShowLike2.swift in Sources */,
 				F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */,
 				F9C664862A052D07005C1905 /* MatchTeamService.swift in Sources */,
+				F90BC2FB2C02E10900EBF038 /* ArenaShowDao.swift in Sources */,
 				B3756EEF21BA6F19006893E1 /* StatusSelectVC.swift in Sources */,
 				B36E334425480007001336C2 /* ShowStoreVC.swift in Sources */,
 				F90BC2B22BF511B100EBF038 /* Observable.swift in Sources */,
@@ -2242,7 +2174,6 @@
 				B3ED38DB1FB488CB0003F083 /* ImagePickerView.swift in Sources */,
 				B313272229A5C8EC00EAB782 /* NOLabel2.swift in Sources */,
 				F9308B3E273954AB002531A1 /* SwitchCell.swift in Sources */,
-				F90BC2B92BF75B6500EBF038 /* read_arena.swift in Sources */,
 				B36CBD5520DFCC9E00E52B9C /* SuperModel.swift in Sources */,
 				B3AA0B732C0033FA00C89424 /* ArenaShowVC.swift in Sources */,
 				B36241372601B3CA008FAD1B /* ProductTable.swift in Sources */,
@@ -2364,6 +2295,7 @@
 				F96AD97A1FD52D1C000D7176 /* TeamTempPlayListCell.swift in Sources */,
 				B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */,
 				B320004F254305410061442D /* StoreService.swift in Sources */,
+				F90BC2FD2C02EA9100EBF038 /* ArenaShowViewModel.swift in Sources */,
 				B3CB73E223E3185E00892F75 /* OlCell.swift in Sources */,
 				B370AECA2BEDC62D007220D7 /* ApiService.swift in Sources */,
 				B3310D9422ACBCC30062EF98 /* ContentEditVC.swift in Sources */,
@@ -2428,6 +2360,7 @@
 				B326C7BC256CE0950048A2C2 /* SelectCitysVC.swift in Sources */,
 				B3E4D17C25FF9E3900D78210 /* Table.swift in Sources */,
 				B362265D25E54C9D00D98317 /* HomeTotalAdVC.swift in Sources */,
+				F90BC2FF2C0326D600EBF038 /* BaseDao.swift in Sources */,
 				F983441429EEC3690050B634 /* MatchVC.swift in Sources */,
 				B3CABD8926B6A66B00FD0E4D /* RadioCell.swift in Sources */,
 				B3E4D1CD2602DD7E00D78210 /* ArenaTable.swift in Sources */,

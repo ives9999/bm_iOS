@@ -27,6 +27,7 @@ target 'bm' do
   pod 'JXBanner'
   pod 'SCLAlertView'
   pod 'AssistantKit'
+  pod 'ImageSlideshow', '~> 1.9.0'
   
   #youtube
   pod 'YouTubePlayer'

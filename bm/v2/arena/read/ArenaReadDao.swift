@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ArenaReadDao: Codable {
+class ArenaReadDao: BaseDao {
     
     var status: Int = 500
     var data: ArenaData = ArenaData()
