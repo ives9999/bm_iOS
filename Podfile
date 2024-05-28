@@ -28,6 +28,7 @@ target 'bm' do
   pod 'SCLAlertView'
   pod 'AssistantKit'
   pod 'ImageSlideshow', '~> 1.9.0'
+  pod "ImageSlideshow/Alamofire"
   
   #youtube
   pod 'YouTubePlayer'

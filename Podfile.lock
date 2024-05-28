@@ -49,6 +49,9 @@ PODS:
     - GoogleUtilities/Logger
   - ImageSlideshow (1.9.2):
     - ImageSlideshow/Core (= 1.9.2)
+  - ImageSlideshow/Alamofire (1.9.2):
+    - AlamofireImage (~> 4.0)
+    - ImageSlideshow/Core
   - ImageSlideshow/Core (1.9.2)
   - IQKeyboardManagerSwift (6.5.11)
   - JXBanner (0.3.6):
@@ -130,6 +133,7 @@ DEPENDENCIES:
   - ECPayPaymentGatewayKit (~> 1.0.4)
   - FirebaseMessaging
   - ImageSlideshow (~> 1.9.0)
+  - ImageSlideshow/Alamofire
   - IQKeyboardManagerSwift
   - JXBanner
   - KeychainSwift (~> 16.0)
@@ -223,6 +227,6 @@ SPEC CHECKSUMS:
   UIColor_Hex_Swift: 20cb4e8d51b63e168a9da6933bc5d39cd8fb4ab5
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-PODFILE CHECKSUM: 8f9852eec3a965951928e9ab44d2aef0b784b893
+PODFILE CHECKSUM: 7fbbef49b6c7a4a3d3d3b09a44df86d025632012
 
 COCOAPODS: 1.15.2

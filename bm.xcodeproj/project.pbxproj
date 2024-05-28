@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -331,6 +331,7 @@
 		F90BC2FB2C02E10900EBF038 /* ArenaShowDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90BC2FA2C02E10900EBF038 /* ArenaShowDao.swift */; };
 		F90BC2FD2C02EA9100EBF038 /* ArenaShowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90BC2FC2C02EA9100EBF038 /* ArenaShowViewModel.swift */; };
 		F90BC2FF2C0326D600EBF038 /* BaseDao.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90BC2FE2C0326D600EBF038 /* BaseDao.swift */; };
+		F90BC3012C04DC1900EBF038 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90BC3002C04DC1900EBF038 /* Line.swift */; };
 		F92FF17028A941280005956D /* MemberSubscriptionPayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92FF16F28A941280005956D /* MemberSubscriptionPayVC.swift */; };
 		F9308B3B2737743F002531A1 /* IconTextSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3A2737743F002531A1 /* IconTextSection.swift */; };
 		F9308B3E273954AB002531A1 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3C273954AB002531A1 /* SwitchCell.swift */; };
@@ -826,6 +827,7 @@
 		F90BC2FA2C02E10900EBF038 /* ArenaShowDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaShowDao.swift; sourceTree = "<group>"; };
 		F90BC2FC2C02EA9100EBF038 /* ArenaShowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaShowViewModel.swift; sourceTree = "<group>"; };
 		F90BC2FE2C0326D600EBF038 /* BaseDao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDao.swift; sourceTree = "<group>"; };
+		F90BC3002C04DC1900EBF038 /* Line.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		F92FF16F28A941280005956D /* MemberSubscriptionPayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSubscriptionPayVC.swift; sourceTree = "<group>"; };
 		F9308B3A2737743F002531A1 /* IconTextSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextSection.swift; sourceTree = "<group>"; };
 		F9308B3C273954AB002531A1 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
@@ -1218,6 +1220,7 @@
 				B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */,
 				F9A6751C27FAF605007C8F47 /* Top.swift */,
 				F9A6751E27FAF766007C8F47 /* Top.xib */,
+				F90BC3002C04DC1900EBF038 /* Line.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1840,7 +1843,7 @@
 				};
 			};
 			buildConfigurationList = F94E7D171F83636A00F550FD /* Build configuration list for PBXProject "bm" */;
-			compatibilityVersion = "Xcode 15.3";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -2069,6 +2072,7 @@
 				F983441A29EEF5C00050B634 /* MatchContact.swift in Sources */,
 				B3ED38E81FB852EB0003F083 /* FormCell.swift in Sources */,
 				B3E8C29B220603310008ED25 /* ShowCoachVC.swift in Sources */,
+				F90BC3012C04DC1900EBF038 /* Line.swift in Sources */,
 				B3D58D042A08A93D008524CC /* MatchGiftTable.swift in Sources */,
 				B36D66B8229997AD00502D62 /* ManagerCourseVC.swift in Sources */,
 				F9F583B2283533C500F77B00 /* ThreeButton.swift in Sources */,

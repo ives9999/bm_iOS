@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import ImageSlideshow
 
 class ArenaShowVC: BaseV2VC {
     
     var token: String = ""
     private var viewModel: ArenaShowViewModel?
     private var dao: ArenaShowDao = ArenaShowDao()
+    
+    let scrollView = UIScrollView()
     
     let nameLbl: SuperLabel = {
         let view = SuperLabel()
@@ -106,7 +109,25 @@ class ArenaShowVC: BaseV2VC {
         
         return view
     }()
-
+    
+    let imageContainer: ImageSlideshow = {
+        let view = ImageSlideshow()
+        return view
+    }()
+    
+    let chargeLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextSize(16)
+        return view
+    }()
+    
+    let contentLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextSize(16)
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,12 +165,28 @@ class ArenaShowVC: BaseV2VC {
         
         self.view.backgroundColor = UIColor(bg_950)
         
+        self.view.addSubview(self.scrollView)
+        self.scrollView.snp.makeConstraints { make in
+            //make.top.equalToSuperview()
+            make.top.equalTo(showTop2!.snp.bottom)
+            make.bottom.left.right.equalToSuperview()
+        }
+        
+        let contentView = UIView(frame: CGRect.zero)
+        //contentView.backgroundColor = UIColor.red
+        self.scrollView.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(self.scrollView)
+            make.left.right.equalTo(self.view)
+            //make.height.equalTo(2000)
+        }
+        
         let filterContainer: UIView = {
             let view = UIView()
             //view.backgroundColor = UIColor.white
             return view
         }()
-        self.view.addSubview(filterContainer)
+        contentView.addSubview(filterContainer)
         filterContainer.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
             //make.top.equalTo(textLbl.snp.bottom)
@@ -157,10 +194,10 @@ class ArenaShowVC: BaseV2VC {
             make.height.equalTo(50)
         }
         
-        self.view.addSubview(nameLbl)
+        contentView.addSubview(nameLbl)
         nameLbl.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(12)
-            make.top.equalTo(filterContainer.snp.bottom).offset(24)
+            make.top.equalTo(contentView).offset(70)
         }
         
         let stackView: UIStackView = {
@@ -170,7 +207,7 @@ class ArenaShowVC: BaseV2VC {
             view.spacing = 8
             return view
         }()
-        self.view.addSubview(stackView)
+        contentView.addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(12)
             make.top.equalTo(nameLbl.snp.bottom).offset(24)
@@ -190,6 +227,64 @@ class ArenaShowVC: BaseV2VC {
         stackView.addArrangedSubview(lineITT2)
         stackView.addArrangedSubview(websiteITT2)
         stackView.addArrangedSubview(pvITT2)
+        
+        contentView.addSubview(imageContainer)
+        imageContainer.snp.makeConstraints { make in
+            make.top.equalTo(stackView.snp.bottom).offset(24)
+            make.left.equalToSuperview().offset(12)
+            make.right.equalToSuperview().offset(-12)
+            make.height.equalTo(200)
+        }
+        
+        let line: Line = Line()
+        contentView.addSubview(line)
+        line.snp.makeConstraints { make in
+            make.top.equalTo(imageContainer.snp.bottom).offset(24)
+            make.left.equalToSuperview().offset(12)
+            make.right.equalToSuperview().offset(-12)
+            make.height.equalTo(1)
+        }
+        
+        let label: SuperLabel = {
+            let view = SuperLabel()
+            view.setTextSize(18)
+            view.setTextBold()
+            view.setTextColor(UIColor(MY_WHITE))
+            view.text = "收費說明"
+            return view
+        }()
+        contentView.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.top.equalTo(line.snp.bottom).offset(24)
+            make.left.equalToSuperview().offset(12)
+        }
+        
+        contentView.addSubview(chargeLbl)
+        chargeLbl.snp.makeConstraints { make in
+            make.top.equalTo(label.snp.bottom).offset(12)
+            make.left.equalToSuperview().offset(12)
+        }
+        
+        let label1: SuperLabel = {
+            let view = SuperLabel()
+            view.setTextSize(18)
+            view.setTextBold()
+            view.setTextColor(UIColor(MY_WHITE))
+            view.text = "詳細說明"
+            return view
+        }()
+        contentView.addSubview(label1)
+        label1.snp.makeConstraints { make in
+            make.top.equalTo(chargeLbl.snp.bottom).offset(24)
+            make.left.equalToSuperview().offset(12)
+        }
+        
+        contentView.addSubview(contentLbl)
+        contentLbl.snp.makeConstraints { make in
+            make.top.equalTo(label1.snp.bottom).offset(12)
+            make.left.equalToSuperview().offset(12)
+            make.bottom.equalTo(contentView).offset(-20)
+        }
     }
     
     func getData() {
@@ -219,5 +314,11 @@ class ArenaShowVC: BaseV2VC {
         lineITT2.setShow(dao.data.line)
         websiteITT2.setShow(dao.data.website)
         pvITT2.setShow(dao.data.pv.formattedWithSeparator)
+        
+        var images: [AlamofireSource] = [AlamofireSource]()
+        for image in dao.data.images {
+            images.append(AlamofireSource(urlString: image.path)!)
+        }
+        imageContainer.setImageInputs(images)
     }
 }
